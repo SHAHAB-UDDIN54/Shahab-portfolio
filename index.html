@@ -1,0 +1,3775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shahab Uddin – Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=Orbitron:wght@700;900&family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+/* ==============================
+   CSS VARIABLES & RESET
+============================== */
+:root {
+  --bg:         #0d0f14;
+  --bg2:        #13161e;
+  --card:       #1a1e2a;
+  --border:     #252a38;
+  --accent:     #c8a97e;
+  --accent2:    #e8c99e;
+  --text:       #e8e6e0;
+  --muted:      #8a8fa8;
+  --white:      #ffffff;
+  --radius:     14px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ==============================
+   NAVIGATION
+============================== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.1rem 5%;
+  background: rgba(13, 15, 20, 0.85);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color var(--transition);
+  position: relative;
+}
+
+/* Animated underline on hover */
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: -3px; left: 0;
+  width: 0; height: 1.5px;
+  background: var(--accent);
+  transition: width var(--transition);
+}
+.nav-links a:hover { color: var(--accent); }
+.nav-links a:hover::after { width: 100%; }
+
+/* Hamburger button (mobile only) */
+.hamburger {
+  display: none;
+  flex-direction: column; gap: 5px;
+  cursor: pointer; background: none; border: none; padding: 4px;
+}
+.hamburger span {
+  display: block; width: 24px; height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+/* ==============================
+   SHARED SECTION STYLES
+============================== */
+section {
+  padding: 7rem 5% 5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+  display: block;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+}
+
+.divider {
+  width: 48px; height: 3px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  border-radius: 2px;
+  margin-bottom: 2.5rem;
+}
+
+/* ==============================
+   BUTTONS
+============================== */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  padding: 0.75rem 1.8rem;
+  background: var(--accent);
+  color: var(--bg);
+  border: none; border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem; font-weight: 600;
+  text-decoration: none; cursor: pointer;
+  transition: var(--transition);
+  position: relative; overflow: hidden;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(200, 169, 126, 0.3);
+}
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  padding: 0.75rem 1.8rem;
+  background: transparent;
+  color: var(--accent);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem; font-weight: 600;
+  text-decoration: none; cursor: pointer;
+  transition: var(--transition);
+}
+.btn-ghost:hover {
+  border-color: var(--accent);
+  background: rgba(200, 169, 126, 0.07);
+  transform: translateY(-2px);
+}
+
+/* ==============================
+   HERO SECTION
+============================== */
+#hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding-top: 6rem;
+  position: relative;
+}
+
+.hero-inner {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  width: 100%;
+}
+
+/* Avatar ring with gradient border */
+.avatar-ring {
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  padding: 4px;
+  background: linear-gradient(135deg, var(--accent), transparent, var(--accent2));
+  position: relative;
+  flex-shrink: 0;
+}
+
+.avatar-ring img,
+.avatar-placeholder {
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  display: block;
+}
+
+.avatar-placeholder {
+  background: var(--card);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 4.5rem;
+  color: var(--accent);
+}
+
+.avatar-badge {
+  position: absolute; bottom: 8px; right: 8px;
+  background: var(--accent);
+  color: var(--bg);
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.hero-greeting {
+  font-size: 0.82rem; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.8rem;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.hero-greeting::before {
+  content: '';
+  display: inline-block;
+  width: 28px; height: 1.5px;
+  background: var(--accent);
+}
+
+.hero-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 6vw, 4.2rem);
+  color: var(--white);
+  line-height: 1.05;
+  margin-bottom: 1rem;
+}
+.hero-name span { color: var(--accent); }
+
+.hero-role { font-size: 1.05rem; color: var(--muted); margin-bottom: 1.5rem; }
+
+.hero-bio {
+  font-size: 1rem; color: var(--text); opacity: 0.8;
+  max-width: 520px; margin-bottom: 2.5rem; font-weight: 300;
+}
+
+.hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+/* Bouncing scroll hint */
+.scroll-hint {
+  position: absolute; bottom: 2rem; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+  color: var(--muted); font-size: 0.72rem; letter-spacing: 0.1em;
+  text-transform: uppercase;
+  animation: bounce 2.2s infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ==============================
+   ABOUT SECTION
+============================== */
+#about { border-top: 1px solid var(--border); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.about-text p {
+  color: var(--text); font-size: 1rem;
+  font-weight: 300; margin-bottom: 1.2rem; opacity: 0.85;
+}
+
+.skills-grid {
+  display: flex; flex-wrap: wrap; gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+
+.skill-tag {
+  padding: 0.35rem 0.9rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 0.8rem; color: var(--accent); font-weight: 500;
+  transition: var(--transition);
+}
+.skill-tag:hover {
+  border-color: var(--accent);
+  background: rgba(200, 169, 126, 0.08);
+}
+
+.stats-col { display: flex; flex-direction: column; gap: 1rem; }
+
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.6rem;
+  transition: var(--transition);
+  position: relative; overflow: hidden;
+}
+/* Gold left border accent */
+.stat-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: var(--accent);
+}
+.stat-card:hover { border-color: var(--accent); transform: translateX(4px); }
+.stat-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.9rem; color: var(--accent); margin-bottom: 0.2rem;
+}
+.stat-card p { font-size: 0.85rem; color: var(--muted); }
+
+/* ==============================
+   SOCIAL LINKS SECTION
+============================== */
+#social { border-top: 1px solid var(--border); }
+
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.2rem;
+}
+
+.social-card {
+  display: flex; flex-direction: column; align-items: center; gap: 0.9rem;
+  padding: 2rem 1.5rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: var(--transition);
+  position: relative; overflow: hidden;
+}
+
+/* Bottom color bar on hover */
+.social-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--social-color, var(--accent));
+  transform: scaleX(0);
+  transition: transform var(--transition);
+}
+.social-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--social-color, var(--accent));
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+.social-card:hover::after { transform: scaleX(1); }
+
+.social-icon {
+  width: 56px; height: 56px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+  color: var(--social-color, var(--accent));
+  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+.social-card:hover .social-icon {
+  background: var(--social-color, var(--accent));
+  color: #fff;
+  transform: rotate(-5deg) scale(1.08);
+}
+
+.social-name { font-size: 0.92rem; font-weight: 600; color: var(--text); }
+.social-handle { font-size: 0.78rem; color: var(--muted); }
+
+/* Brand colors (CSS custom properties per card) */
+.fb { --social-color: #1877f2; }
+.wa { --social-color: #25d366; }
+.li { --social-color: #0a66c2; }
+.gh { --social-color: #e8e6e0; }
+.yt { --social-color: #ff0000; }
+
+/* ==============================
+   CV SECTION
+============================== */
+#cv { border-top: 1px solid var(--border); }
+
+.cv-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 3rem;
+  display: flex; align-items: center;
+  justify-content: space-between;
+  gap: 2rem; flex-wrap: wrap;
+}
+
+.cv-info h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; color: var(--white); margin-bottom: 0.5rem;
+}
+.cv-info p { font-size: 0.95rem; color: var(--muted); max-width: 420px; }
+
+.cv-meta {
+  display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 1.2rem;
+}
+.cv-meta span {
+  display: flex; align-items: center; gap: 0.4rem;
+  font-size: 0.82rem; color: var(--muted);
+}
+.cv-meta i { color: var(--accent); }
+
+/* ==============================
+   CONTACT SECTION
+============================== */
+#contact { border-top: 1px solid var(--border); }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.contact-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  display: flex; align-items: flex-start; gap: 1.2rem;
+  transition: var(--transition);
+  text-decoration: none;
+}
+.contact-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+
+.contact-icon {
+  width: 50px; height: 50px; flex-shrink: 0;
+  background: rgba(200, 169, 126, 0.1);
+  border: 1px solid rgba(200, 169, 126, 0.2);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; color: var(--accent);
+  transition: var(--transition);
+}
+.contact-card:hover .contact-icon { background: var(--accent); color: var(--bg); }
+
+.contact-info label {
+  font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted); display: block; margin-bottom: 0.3rem;
+}
+.contact-info span { font-size: 1rem; color: var(--text); font-weight: 500; }
+
+/* ==============================
+   FOOTER
+============================== */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem 5%;
+  max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+}
+footer p { font-size: 0.82rem; color: var(--muted); }
+footer p span { color: var(--accent); }
+
+.footer-links { display: flex; gap: 1.5rem; }
+.footer-links a {
+  font-size: 0.82rem; color: var(--muted); text-decoration: none;
+  transition: color var(--transition);
+}
+.footer-links a:hover { color: var(--accent); }
+
+/* ==============================
+   FADE-IN ANIMATION
+============================== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ==============================
+   RESPONSIVE (MOBILE)
+============================== */
+@media (max-width: 768px) {
+  .hamburger { display: flex; }
+  .nav-links {
+    position: fixed; top: 60px; left: 0; right: 0;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column; align-items: center;
+    padding: 1.5rem 0; gap: 1.5rem;
+    transform: translateY(-110%);
+    transition: transform var(--transition);
+  }
+  .nav-links.open { transform: translateY(0); }
+}
+
+@media (max-width: 900px) {
+  .about-grid   { grid-template-columns: 1fr; gap: 2.5rem; }
+  .contact-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .hero-inner { flex-direction: column; text-align: center; gap: 2.5rem; }
+  .hero-greeting { justify-content: center; }
+  .hero-bio { margin: 0 auto 2.5rem; }
+  .hero-cta { justify-content: center; }
+  .avatar-ring { width: 160px; height: 160px; }
+  section { padding: 5rem 5% 3.5rem; }
+  .cv-card { flex-direction: column; text-align: center; }
+  .cv-meta { justify-content: center; }
+}
+/* ==============================
+   PROJECTS SECTION
+============================== */
+#projects { border-top: 1px solid var(--border); }
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.project-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.8rem;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.project-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+}
+
+.project-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.project-icon {
+  width: 52px; height: 52px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+}
+.ml-icon {
+  background: rgba(124, 58, 237, 0.15);
+  color: #a78bfa;
+  border: 1px solid rgba(124, 58, 237, 0.3);
+}
+.tr-icon {
+  background: rgba(249, 115, 22, 0.15);
+  color: #fb923c;
+  border: 1px solid rgba(249, 115, 22, 0.3);
+}
+
+.project-link {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: rgba(200, 169, 126, 0.1);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent);
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: var(--transition);
+}
+.project-link:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.project-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--white);
+  line-height: 1.3;
+}
+
+.project-desc {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.7;
+  flex: 1;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.3rem;
+}
+
+.project-tag {
+  padding: 0.25rem 0.7rem;
+  background: rgba(200, 169, 126, 0.08);
+  border: 1px solid rgba(200, 169, 126, 0.2);
+  border-radius: 20px;
+  font-size: 0.72rem;
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+
+/* ── PROJECT MODAL OVERLAY ── */
+.modal-overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,0.92);
+  backdrop-filter: blur(4px);
+  overflow-y: auto;
+}
+.modal-overlay.open { display: block; }
+.modal-close {
+  position: fixed; top: 18px; right: 24px; z-index: 10001;
+  background: #c8a97e; color: #0d0f14;
+  border: none; border-radius: 50%;
+  width: 42px; height: 42px;
+  font-size: 1.2rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  transition: transform 0.2s;
+}
+.modal-close:hover { transform: scale(1.1); }
+.modal-frame {
+  position: relative; z-index: 10000;
+  padding: 60px 0 0;
+  min-height: 100vh;
+}
+
+/* ML project scoped */
+#modal-ml .ml-wrap { all: initial; display: block; }
+/* Transport project scoped */
+#modal-tr .tr-wrap { all: initial; display: block; }
+  </style>
+
+  <!-- ML Project Styles (scoped) -->
+  <style id="ml-styles" media="none">
+
+:root{
+  --cyan:#00d4e8;--electric:#00e67a;--orange:#ff6b35;--purple:#7c3aed;--red:#e11d48;--amber:#f59e0b;
+  --bg:#030d18;--bg2:#071626;--panel:rgba(0,212,232,0.05);
+  --border:rgba(0,212,232,0.15);--text:#e2f0ff;--muted:rgba(226,240,255,0.45);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;min-height:100vh;overflow-x:hidden;}
+.grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,232,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,232,0.03) 1px,transparent 1px);background-size:44px 44px;pointer-events:none;z-index:0;}
+.scanlines{position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.07) 3px,rgba(0,0,0,0.07) 4px);pointer-events:none;z-index:1;}
+.corner{position:fixed;width:50px;height:50px;z-index:5;opacity:.5;}
+.c-tl{top:16px;left:16px;border-top:2px solid var(--cyan);border-left:2px solid var(--cyan);}
+.c-tr{top:16px;right:16px;border-top:2px solid var(--cyan);border-right:2px solid var(--cyan);}
+.c-bl{bottom:16px;left:16px;border-bottom:2px solid var(--cyan);border-left:2px solid var(--cyan);}
+.c-br{bottom:16px;right:16px;border-bottom:2px solid var(--cyan);border-right:2px solid var(--cyan);}
+
+/* ── ROBOT BG ── */
+.robot-silhouette{position:fixed;right:-60px;bottom:-40px;width:600px;height:600px;opacity:.07;pointer-events:none;z-index:0;}
+
+/* ── LAYOUT ── */
+.app{position:relative;z-index:2;display:flex;height:100vh;overflow:hidden;}
+.sidebar{width:340px;min-width:280px;background:var(--bg2);border-right:1px solid var(--border);overflow-y:auto;flex-shrink:0;}
+.main-panel{flex:1;overflow-y:auto;display:flex;flex-direction:column;}
+
+/* ── SIDEBAR HEADER ── */
+.sidebar-header{padding:24px 20px 16px;border-bottom:1px solid var(--border);text-align:center;}
+.sidebar-title{font-family:'Orbitron',monospace;font-size:14px;font-weight:900;color:var(--cyan);letter-spacing:1px;text-transform:uppercase;}
+.sidebar-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;margin-top:4px;}
+
+/* ── PHASES ── */
+.phase-group{border-bottom:1px solid var(--border);}
+.phase-header{padding:12px 20px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:background .2s;}
+.phase-header:hover{background:rgba(0,212,232,0.06);}
+.phase-header.active{background:rgba(0,212,232,0.1);}
+.phase-dot-s{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.phase-title-s{font-family:'Orbitron',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;flex:1;line-height:1.3;}
+.phase-arrow{font-size:10px;color:var(--muted);transition:transform .3s;}
+.phase-arrow.open{transform:rotate(90deg);}
+.topic-list{display:none;padding:0 0 8px;}
+.topic-list.open{display:block;}
+.topic-btn{width:100%;text-align:left;background:none;border:none;padding:8px 20px 8px 44px;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .2s;letter-spacing:.5px;position:relative;}
+.topic-btn::before{content:'›';position:absolute;left:32px;color:inherit;opacity:.5;}
+.topic-btn:hover{color:var(--text);background:rgba(255,255,255,0.03);}
+.topic-btn.active{color:var(--cyan);background:rgba(0,212,232,0.08);}
+.topic-btn.active::before{content:'▸';opacity:1;}
+
+/* ── MAIN: WELCOME ── */
+.welcome{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 32px;text-align:center;}
+.welcome-robot{margin-bottom:24px;}
+.welcome-title{font-family:'Orbitron',monospace;font-size:clamp(20px,3vw,36px);font-weight:900;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;line-height:1.2;}
+.welcome-sub{font-size:15px;color:var(--muted);margin-top:12px;max-width:480px;line-height:1.6;}
+.welcome-hint{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--electric);letter-spacing:2px;margin-top:20px;animation:blink 2.5s ease infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+/* ── MAIN: TOPIC DETAIL ── */
+.topic-detail{display:none;flex-direction:column;height:100%;overflow-y:auto;}
+.topic-detail.visible{display:flex;}
+.detail-header{padding:28px 32px 20px;border-bottom:1px solid var(--border);position:relative;flex-shrink:0;}
+.detail-breadcrumb{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+.detail-title{font-family:'Orbitron',monospace;font-size:clamp(18px,2.5vw,28px);font-weight:900;text-transform:uppercase;line-height:1.2;}
+.detail-badge{display:inline-block;padding:4px 12px;border-radius:3px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-top:10px;border:1px solid;}
+.detail-body{padding:28px 32px;flex:1;}
+.section{margin-bottom:28px;}
+.section-label{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+.section-text{font-size:15px;color:var(--text);line-height:1.75;font-weight:400;}
+.section-text b{font-weight:700;color:var(--cyan);}
+.type-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:12px;}
+.type-card{background:var(--panel);border:1px solid var(--border);padding:16px;border-radius:4px;transition:border-color .2s;}
+.type-card:hover{border-color:rgba(0,212,232,0.4);}
+.type-card-title{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;text-transform:uppercase;margin-bottom:8px;}
+.type-card-text{font-size:13px;color:var(--muted);line-height:1.6;}
+.example-box{background:rgba(0,212,232,0.04);border:1px solid rgba(0,212,232,0.12);border-left:3px solid var(--cyan);padding:16px;border-radius:0 4px 4px 0;margin-top:10px;}
+.example-box p{font-size:14px;color:var(--text);line-height:1.7;}
+.example-box .ex-label{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:6px;}
+.key-points{list-style:none;margin-top:10px;}
+.key-points li{padding:7px 0 7px 20px;position:relative;font-size:14px;color:var(--text);line-height:1.6;border-bottom:1px solid rgba(255,255,255,0.04);}
+.key-points li::before{content:'▸';position:absolute;left:0;color:var(--cyan);font-size:10px;top:10px;}
+.use-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+.use-tag{padding:5px 14px;border:1px solid;border-radius:3px;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+.algo-table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13px;}
+.algo-table th{text-align:left;padding:8px 12px;background:rgba(0,212,232,0.08);font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);}
+.algo-table td{padding:9px 12px;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text);line-height:1.5;}
+.algo-table tr:hover td{background:rgba(0,212,232,0.03);}
+.nav-hint{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);text-align:center;padding:16px;letter-spacing:1px;}
+@media(max-width:700px){
+  .app{flex-direction:column;height:auto;overflow:visible;}
+  .sidebar{width:100%;max-height:280px;border-right:none;border-bottom:1px solid var(--border);}
+  .main-panel{min-height:60vh;}
+  .detail-body{padding:20px 16px;}
+  .detail-header{padding:20px 16px 16px;}
+}
+
+  </style>
+
+  <!-- Transport Project Styles (scoped) -->
+  <style id="tr-styles" media="none">
+
+:root {
+  --navy: #0a1628;
+  --navy2: #0f2040;
+  --navy3: #162d55;
+  --orange: #f97316;
+  --orange2: #fb923c;
+  --orange-dark: #c2410c;
+  --gold: #fbbf24;
+  --white: #ffffff;
+  --gray: #94a3b8;
+  --light: #e2e8f0;
+  --glass: rgba(255,255,255,0.07);
+  --glass-border: rgba(255,255,255,0.12);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--navy); }
+::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 3px; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 0 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 70px;
+  background: rgba(10,22,40,0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(249,115,22,0.2);
+  transition: all 0.3s;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 12px;
+}
+.nav-logo-icon {
+  width: 44px; height: 44px;
+  background: var(--orange);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+}
+.nav-logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; }
+.nav-logo-text span { color: var(--orange); }
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a { color: var(--light); text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.5px; transition: color 0.2s; }
+.nav-links a:hover { color: var(--orange); }
+.nav-cta {
+  background: var(--orange); color: white; padding: 10px 24px;
+  border-radius: 6px; font-weight: 700; font-size: 13px; letter-spacing: 1px;
+  text-decoration: none; text-transform: uppercase; transition: all 0.2s;
+  border: 2px solid var(--orange);
+}
+.nav-cta:hover { background: transparent; color: var(--orange); }
+
+/* ─── HERO ─── */
+#hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex; align-items: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(10,22,40,0.6) 0%, rgba(10,22,40,0.3) 40%, rgba(10,22,40,0.75) 100%),
+    url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1800&q=80') center/cover no-repeat;
+}
+.hero-sky {
+  position: absolute; top: 0; left: 0; right: 0; height: 50%;
+  background: linear-gradient(to bottom, #0a1628 0%, transparent 100%);
+  opacity: 0.7;
+}
+/* Road lines */
+.road-lines {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 200px;
+  background: linear-gradient(to top, rgba(10,22,40,0.9) 0%, transparent 100%);
+  overflow: hidden;
+}
+.road-line {
+  position: absolute; bottom: 80px; height: 4px; width: 120px;
+  background: var(--orange); opacity: 0.6; border-radius: 2px;
+  animation: road-move 2s linear infinite;
+}
+.road-line:nth-child(1) { left: 10%; animation-delay: 0s; }
+.road-line:nth-child(2) { left: 30%; animation-delay: 0.4s; }
+.road-line:nth-child(3) { left: 50%; animation-delay: 0.8s; }
+.road-line:nth-child(4) { left: 70%; animation-delay: 1.2s; }
+.road-line:nth-child(5) { left: 90%; animation-delay: 1.6s; }
+@keyframes road-move {
+  0% { transform: translateX(0) scaleX(1); opacity: 0.6; }
+  50% { opacity: 0.3; }
+  100% { transform: translateX(-60px) scaleX(0.5); opacity: 0; }
+}
+/* Animated truck */
+.hero-truck {
+  position: absolute; bottom: 120px; left: -300px;
+  font-size: 90px; line-height: 1;
+  filter: drop-shadow(0 0 30px rgba(249,115,22,0.5));
+  animation: truck-drive 12s linear infinite;
+}
+@keyframes truck-drive {
+  0% { left: -300px; opacity: 0; }
+  5% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { left: 110%; opacity: 0; }
+}
+/* Dust */
+.dust {
+  position: absolute; bottom: 110px; width: 80px; height: 30px;
+  background: radial-gradient(ellipse, rgba(249,115,22,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: truck-drive 12s linear infinite;
+  animation-delay: -0.3s;
+}
+/* GPS pin */
+.gps-pin {
+  position: absolute; top: 35%; right: 15%;
+  animation: gps-bounce 2s ease-in-out infinite;
+}
+.gps-pin-dot {
+  width: 18px; height: 18px; background: var(--orange); border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 0 0 0 rgba(249,115,22,0.5);
+  animation: gps-pulse 2s ease infinite;
+}
+.gps-pin-label {
+  background: var(--orange); color: white; font-size: 11px; font-weight: 700;
+  padding: 4px 10px; border-radius: 20px; margin-top: 6px; white-space: nowrap;
+}
+@keyframes gps-bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes gps-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(249,115,22,0.5); }
+  70% { box-shadow: 0 0 0 15px rgba(249,115,22,0); }
+  100% { box-shadow: 0 0 0 0 rgba(249,115,22,0); }
+}
+
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 1300px; margin: 0 auto; padding: 120px 40px 60px;
+  display: grid; grid-template-columns: 1fr 440px; gap: 60px; align-items: center;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(249,115,22,0.15); border: 1px solid rgba(249,115,22,0.4);
+  padding: 6px 16px; border-radius: 30px; font-size: 12px; font-weight: 600;
+  color: var(--orange2); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px;
+}
+.hero-badge::before { content: '●'; animation: blink 1.5s infinite; }
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 7vw, 90px);
+  line-height: 0.95;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+.hero-title span { color: var(--orange); display: block; }
+.hero-sub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(18px, 2.5vw, 26px);
+  font-weight: 400; color: var(--light); margin-bottom: 36px;
+  letter-spacing: 0.5px; line-height: 1.4;
+}
+.hero-sub strong { color: var(--orange2); font-weight: 700; }
+.hero-btns { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 50px; }
+.btn-primary {
+  background: var(--orange); color: white;
+  padding: 15px 32px; border-radius: 8px;
+  font-weight: 800; font-size: 14px; letter-spacing: 1.5px; text-transform: uppercase;
+  text-decoration: none; border: 2px solid var(--orange);
+  transition: all 0.25s; cursor: pointer; display: inline-block;
+  box-shadow: 0 8px 30px rgba(249,115,22,0.35);
+}
+.btn-primary:hover { background: transparent; color: var(--orange); transform: translateY(-2px); }
+.btn-outline {
+  background: transparent; color: white;
+  padding: 15px 32px; border-radius: 8px;
+  font-weight: 700; font-size: 14px; letter-spacing: 1.5px; text-transform: uppercase;
+  text-decoration: none; border: 2px solid rgba(255,255,255,0.3);
+  transition: all 0.25s; cursor: pointer; display: inline-block;
+}
+.btn-outline:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-2px); }
+.hero-stats {
+  display: flex; gap: 32px;
+}
+.stat { text-align: left; }
+.stat-num {
+  font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--orange); line-height: 1;
+}
+.stat-label { font-size: 12px; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+
+/* Booking card */
+.booking-card {
+  background: rgba(15,32,64,0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+}
+.booking-card h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px; font-weight: 700; color: var(--orange);
+  text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 8px;
+}
+.form-group { margin-bottom: 14px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-group label { display: block; font-size: 11px; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.form-group select, .form-group input {
+  width: 100%; padding: 11px 14px;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px; color: white; font-family: 'Barlow', sans-serif; font-size: 14px;
+  transition: border-color 0.2s; outline: none;
+}
+.form-group select:focus, .form-group input:focus { border-color: var(--orange); }
+.form-group select option { background: var(--navy2); }
+.price-preview {
+  background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3);
+  border-radius: 10px; padding: 14px; margin-top: 12px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.price-preview-label { font-size: 12px; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; }
+.price-preview-val { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--orange); }
+.book-btn {
+  width: 100%; background: var(--orange); color: white;
+  padding: 14px; border-radius: 8px; border: none;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase; cursor: pointer; margin-top: 14px;
+  transition: all 0.25s; box-shadow: 0 6px 20px rgba(249,115,22,0.3);
+}
+.book-btn:hover { background: var(--orange-dark); transform: translateY(-1px); }
+
+/* ─── SECTION BASE ─── */
+.section { padding: 100px 40px; max-width: 1300px; margin: 0 auto; }
+.section-label {
+  font-size: 12px; font-weight: 700; color: var(--orange); text-transform: uppercase;
+  letter-spacing: 3px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;
+}
+.section-label::before { content: ''; width: 30px; height: 2px; background: var(--orange); }
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 5vw, 58px);
+  line-height: 1; letter-spacing: 1px; margin-bottom: 16px;
+}
+.section-sub { color: var(--gray); font-size: 16px; max-width: 560px; line-height: 1.6; }
+
+/* ─── DIVIDER ─── */
+.divider {
+  height: 1px; background: linear-gradient(to right, transparent, rgba(249,115,22,0.3), transparent);
+  max-width: 1300px; margin: 0 auto;
+}
+
+/* ─── FLEET SECTION ─── */
+#fleet { background: var(--navy2); padding: 100px 0; }
+#fleet .inner { max-width: 1300px; margin: 0 auto; padding: 0 40px; }
+.fleet-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px; margin-top: 60px;
+}
+.truck-card {
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 14px; padding: 24px 20px; text-align: center;
+  transition: all 0.3s; cursor: pointer; position: relative; overflow: hidden;
+}
+.truck-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(249,115,22,0.08) 0%, transparent 60%);
+  opacity: 0; transition: opacity 0.3s;
+}
+.truck-card:hover { border-color: var(--orange); transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+.truck-card:hover::before { opacity: 1; }
+.truck-icon { font-size: 52px; margin-bottom: 12px; display: block; }
+.truck-name { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.truck-capacity { font-size: 13px; color: var(--orange2); font-weight: 600; }
+.truck-details { font-size: 12px; color: var(--gray); margin-top: 8px; }
+.truck-badge {
+  position: absolute; top: 12px; right: 12px;
+  background: var(--orange); color: white; font-size: 10px; font-weight: 700;
+  padding: 3px 8px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px;
+}
+
+/* ─── COVERAGE MAP ─── */
+#coverage { padding: 100px 0; background: var(--navy); }
+#coverage .inner { max-width: 1300px; margin: 0 auto; padding: 0 40px; }
+.cities-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px; margin-top: 50px;
+}
+.city-card {
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 12px; padding: 20px; text-align: center;
+  transition: all 0.25s; cursor: pointer;
+}
+.city-card:hover { border-color: var(--orange); background: rgba(249,115,22,0.08); }
+.city-flag { font-size: 28px; margin-bottom: 8px; }
+.city-name { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+.city-status { font-size: 11px; color: var(--orange2); margin-top: 4px; }
+
+/* ─── CALCULATOR ─── */
+#calculator { padding: 100px 0; background: var(--navy2); }
+#calculator .inner { max-width: 1300px; margin: 0 auto; padding: 0 40px; }
+.calc-grid { display: grid; grid-template-columns: 1fr 420px; gap: 60px; align-items: start; margin-top: 60px; }
+.calc-form {
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 16px; padding: 36px;
+}
+.calc-form .form-group label { color: var(--gray); }
+.calc-form select, .calc-form input {
+  width: 100%; padding: 12px 16px;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px; color: white; font-family: 'Barlow', sans-serif; font-size: 14px;
+  outline: none; transition: border-color 0.2s; margin-top: 6px;
+}
+.calc-form select:focus, .calc-form input:focus { border-color: var(--orange); }
+.calc-form select option { background: var(--navy2); }
+.calc-result {
+  background: linear-gradient(135deg, var(--navy3) 0%, rgba(249,115,22,0.1) 100%);
+  border: 1px solid rgba(249,115,22,0.3);
+  border-radius: 16px; padding: 36px; position: sticky; top: 90px;
+}
+.calc-result h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--orange); margin-bottom: 24px; }
+.price-breakdown { list-style: none; }
+.price-breakdown li {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 14px;
+}
+.price-breakdown li:last-child { border-bottom: none; }
+.price-breakdown .label { color: var(--gray); }
+.price-breakdown .value { font-weight: 600; }
+.price-total {
+  margin-top: 20px; padding: 20px;
+  background: rgba(249,115,22,0.1); border-radius: 12px; text-align: center;
+}
+.price-total-label { font-size: 12px; color: var(--gray); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px; }
+.price-total-num { font-family: 'Bebas Neue', sans-serif; font-size: 52px; color: var(--orange); line-height: 1; }
+.price-total-sub { font-size: 12px; color: var(--gray); margin-top: 4px; }
+.calc-btn { width: 100%; margin-top: 20px; }
+
+/* ─── TRACKING ─── */
+#tracking { padding: 100px 0; background: var(--navy); }
+#tracking .inner { max-width: 1300px; margin: 0 auto; padding: 0 40px; }
+.track-container {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 60px; align-items: start;
+}
+.track-form {
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 16px; padding: 36px;
+}
+.track-input {
+  display: flex; gap: 12px; margin-bottom: 24px;
+}
+.track-input input {
+  flex: 1; padding: 14px 18px;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px; color: white; font-family: 'Barlow', sans-serif; font-size: 15px; outline: none;
+  transition: border-color 0.2s;
+}
+.track-input input:focus { border-color: var(--orange); }
+.track-input input::placeholder { color: var(--gray); }
+.track-result { display: none; }
+.track-result.active { display: block; }
+.track-status-bar {
+  display: flex; justify-content: space-between; margin: 28px 0; position: relative;
+}
+.track-status-bar::before {
+  content: ''; position: absolute; top: 16px; left: 10%; right: 10%;
+  height: 2px; background: rgba(255,255,255,0.1); z-index: 0;
+}
+.track-step {
+  text-align: center; position: relative; z-index: 1; flex: 1;
+}
+.track-step-dot {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.2);
+  margin: 0 auto 8px; display: flex; align-items: center; justify-content: center;
+  font-size: 14px; transition: all 0.3s;
+}
+.track-step.done .track-step-dot { background: var(--orange); border-color: var(--orange); }
+.track-step.active .track-step-dot { background: transparent; border-color: var(--orange); animation: gps-pulse 2s infinite; }
+.track-step-label { font-size: 11px; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
+.track-step.done .track-step-label { color: var(--orange2); }
+.driver-card {
+  background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border);
+  border-radius: 12px; padding: 16px; display: flex; gap: 14px; align-items: center;
+  margin-top: 20px;
+}
+.driver-avatar { width: 50px; height: 50px; border-radius: 50%; background: var(--navy3); display: flex; align-items: center; justify-content: center; font-size: 24px; border: 2px solid var(--orange); }
+.driver-info { flex: 1; }
+.driver-name { font-weight: 700; font-size: 15px; margin-bottom: 2px; }
+.driver-sub { font-size: 12px; color: var(--gray); }
+.driver-contact { text-align: right; }
+.driver-contact a { color: var(--orange); font-size: 13px; font-weight: 600; text-decoration: none; }
+
+/* Map placeholder */
+.map-placeholder {
+  background: var(--navy3); border: 1px solid var(--glass-border);
+  border-radius: 16px; overflow: hidden; position: relative; min-height: 400px;
+}
+.map-inner {
+  width: 100%; height: 100%; min-height: 400px;
+  background: linear-gradient(135deg, #0f2040 0%, #162d55 100%);
+  display: flex; align-items: center; justify-content: center; position: relative;
+  overflow: hidden;
+}
+.map-route {
+  position: absolute; inset: 0;
+}
+.map-city { position: absolute; }
+.map-city-dot { width: 12px; height: 12px; background: var(--orange); border-radius: 50%; border: 2px solid white; }
+.map-city-label { font-size: 12px; font-weight: 600; color: white; margin-top: 4px; white-space: nowrap; }
+.map-truck-moving {
+  position: absolute; font-size: 28px;
+  filter: drop-shadow(0 0 10px rgba(249,115,22,0.6));
+  animation: map-truck-move 4s ease-in-out infinite;
+}
+@keyframes map-truck-move {
+  0% { left: 20%; top: 60%; }
+  50% { left: 55%; top: 35%; }
+  100% { left: 75%; top: 25%; }
+}
+.map-overlay-text {
+  position: absolute; bottom: 20px; left: 20px; right: 20px;
+  background: rgba(10,22,40,0.9); border-radius: 10px; padding: 14px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+/* ─── TRUST ─── */
+#trust { padding: 100px 0; background: var(--navy2); }
+#trust .inner { max-width: 1300px; margin: 0 auto; padding: 0 40px; }
+.trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
+.trust-card {
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 16px; padding: 32px 28px; transition: all 0.3s;
+}
+.trust-card:hover { border-color: var(--orange); transform: translateY(-4px); }
+.trust-icon { font-size: 40px; margin-bottom: 16px; display: block; }
+.trust-title { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+.trust-desc { font-size: 14px; color: var(--gray); line-height: 1.6; }
+
+/* ─── PAYMENT ─── */
+#payment { padding: 100px 0; background: var(--navy); }
+#payment .inner { max-width: 1300px; margin: 0 auto; padding: 0 40px; }
+.payment-methods { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 50px; }
+.payment-card {
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 14px; padding: 24px 30px; display: flex; align-items: center; gap: 16px;
+  min-width: 200px; transition: all 0.25s;
+}
+.payment-card:hover { border-color: var(--orange); }
+.payment-logo { font-size: 36px; }
+.payment-name { font-weight: 700; font-size: 16px; }
+.payment-sub { font-size: 12px; color: var(--gray); }
+
+/* ─── CUSTOMER DASH ─── */
+#dashboard { padding: 100px 0; background: var(--navy2); }
+#dashboard .inner { max-width: 1300px; margin: 0 auto; padding: 0 40px; }
+.dash-layout { display: grid; grid-template-columns: 240px 1fr; gap: 30px; margin-top: 60px; }
+.dash-sidebar {
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 16px; padding: 24px; height: fit-content;
+}
+.dash-user { text-align: center; margin-bottom: 24px; }
+.dash-avatar { width: 60px; height: 60px; background: var(--navy3); border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 28px; border: 2px solid var(--orange); }
+.dash-user-name { font-weight: 700; font-size: 15px; }
+.dash-user-sub { font-size: 12px; color: var(--gray); }
+.dash-nav { list-style: none; }
+.dash-nav li { margin-bottom: 4px; }
+.dash-nav a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border-radius: 8px; color: var(--gray);
+  font-size: 14px; font-weight: 500; text-decoration: none; transition: all 0.2s;
+}
+.dash-nav a:hover, .dash-nav a.active { background: rgba(249,115,22,0.12); color: var(--orange); }
+.dash-main { display: flex; flex-direction: column; gap: 24px; }
+.dash-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.dash-card {
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 14px; padding: 20px;
+}
+.dash-card-icon { font-size: 24px; margin-bottom: 8px; }
+.dash-card-num { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--orange); }
+.dash-card-label { font-size: 12px; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; }
+.orders-table {
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 14px; overflow: hidden;
+}
+.orders-table-header {
+  padding: 16px 20px; border-bottom: 1px solid var(--glass-border);
+  font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--orange);
+}
+table { width: 100%; border-collapse: collapse; }
+th {
+  padding: 12px 20px; text-align: left;
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+  color: var(--gray); border-bottom: 1px solid var(--glass-border);
+}
+td { padding: 14px 20px; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+tr:last-child td { border-bottom: none; }
+.status-badge {
+  display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.status-delivered { background: rgba(34,197,94,0.15); color: #4ade80; }
+.status-transit { background: rgba(249,115,22,0.15); color: var(--orange2); }
+.status-pending { background: rgba(148,163,184,0.15); color: var(--gray); }
+
+/* ─── ADMIN DASH ─── */
+#admin { padding: 100px 0; background: var(--navy); }
+#admin .inner { max-width: 1300px; margin: 0 auto; padding: 0 40px; }
+.admin-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 60px; }
+.admin-card {
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 14px; padding: 24px; position: relative; overflow: hidden;
+}
+.admin-card::after {
+  content: ''; position: absolute; top: 0; right: 0; width: 60px; height: 60px;
+  background: radial-gradient(circle, rgba(249,115,22,0.15) 0%, transparent 70%);
+}
+.admin-card-icon { font-size: 32px; margin-bottom: 12px; display: block; }
+.admin-card-num { font-family: 'Bebas Neue', sans-serif; font-size: 40px; color: var(--white); line-height: 1; }
+.admin-card-label { font-size: 12px; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+.admin-card-change { font-size: 12px; color: #4ade80; margin-top: 8px; }
+.admin-lower { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-top: 24px; }
+.admin-orders {
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 14px; overflow: hidden;
+}
+.admin-actions {
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 14px; padding: 24px;
+}
+.admin-actions h4 { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--orange); margin-bottom: 16px; }
+.action-btn {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px; border-radius: 8px;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border);
+  color: white; font-size: 13px; font-weight: 500; cursor: pointer;
+  text-decoration: none; margin-bottom: 8px; transition: all 0.2s; width: 100%;
+}
+.action-btn:hover { border-color: var(--orange); background: rgba(249,115,22,0.08); }
+.action-btn span { font-size: 16px; }
+
+/* ─── CONTACT ─── */
+#contact { padding: 100px 0; background: var(--navy2); }
+#contact .inner { max-width: 1300px; margin: 0 auto; padding: 0 40px; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 60px; }
+.contact-methods { display: flex; flex-direction: column; gap: 16px; }
+.contact-card {
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 14px; padding: 20px 24px; display: flex; gap: 16px; align-items: center;
+  transition: all 0.25s; text-decoration: none; color: white;
+}
+.contact-card:hover { border-color: var(--orange); transform: translateX(6px); }
+.contact-icon { font-size: 28px; width: 48px; text-align: center; }
+.contact-text-label { font-size: 11px; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; }
+.contact-text-val { font-weight: 700; font-size: 16px; margin-top: 2px; }
+.wa-btn {
+  background: #25D366; color: white; padding: 16px 32px; border-radius: 8px;
+  font-weight: 800; font-size: 15px; letter-spacing: 1px; text-transform: uppercase;
+  text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
+  transition: all 0.25s; margin-top: 10px;
+}
+.wa-btn:hover { background: #128C7E; transform: translateY(-2px); }
+.contact-form { display: flex; flex-direction: column; gap: 14px; }
+.contact-form input, .contact-form textarea, .contact-form select {
+  padding: 13px 16px;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px; color: white; font-family: 'Barlow', sans-serif; font-size: 14px; outline: none;
+  transition: border-color 0.2s;
+}
+.contact-form input:focus, .contact-form textarea:focus { border-color: var(--orange); }
+.contact-form textarea { min-height: 120px; resize: vertical; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--navy); border-top: 1px solid rgba(249,115,22,0.15);
+  padding: 60px 40px 30px;
+}
+.footer-inner { max-width: 1300px; margin: 0 auto; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 50px; }
+.footer-brand-name { font-family: 'Bebas Neue', sans-serif; font-size: 28px; margin-bottom: 10px; }
+.footer-brand-name span { color: var(--orange); }
+.footer-desc { font-size: 14px; color: var(--gray); line-height: 1.7; max-width: 280px; }
+.footer-col h5 { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--orange); margin-bottom: 16px; }
+.footer-col a { display: block; color: var(--gray); text-decoration: none; font-size: 14px; margin-bottom: 8px; transition: color 0.2s; }
+.footer-col a:hover { color: var(--orange); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 13px; color: var(--gray);
+}
+.footer-bottom span { color: var(--orange); }
+
+/* ─── TICKER ─── */
+.ticker-wrap {
+  background: var(--orange); padding: 12px 0; overflow: hidden; position: relative;
+}
+.ticker { display: flex; animation: ticker 25s linear infinite; white-space: nowrap; }
+.ticker-item {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  padding: 0 40px; color: white;
+}
+.ticker-item::after { content: '●'; opacity: 0.5; margin-left: 30px; }
+@keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* ─── COUNTER STRIP ─── */
+.counter-strip {
+  background: var(--navy3); border-top: 1px solid rgba(249,115,22,0.15); border-bottom: 1px solid rgba(249,115,22,0.15);
+  padding: 50px 40px;
+}
+.counter-strip .inner { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; }
+.counter-item {}
+.counter-num { font-family: 'Bebas Neue', sans-serif; font-size: 56px; color: var(--orange); line-height: 1; }
+.counter-label { font-size: 13px; color: var(--gray); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px; }
+
+/* ─── REVIEWS ─── */
+#reviews { padding: 100px 0; background: var(--navy); }
+#reviews .inner { max-width: 1300px; margin: 0 auto; padding: 0 40px; }
+.reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
+.review-card {
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 16px; padding: 28px; transition: all 0.3s;
+}
+.review-card:hover { border-color: rgba(249,115,22,0.3); transform: translateY(-4px); }
+.review-stars { color: var(--gold); font-size: 16px; margin-bottom: 14px; letter-spacing: 2px; }
+.review-text { font-size: 14px; color: var(--light); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+.review-author { display: flex; align-items: center; gap: 12px; }
+.review-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--navy3); display: flex; align-items: center; justify-content: center; font-size: 20px; border: 2px solid var(--orange); }
+.review-name { font-weight: 700; font-size: 14px; }
+.review-co { font-size: 12px; color: var(--gray); }
+
+/* ─── SCROLL ANIMATIONS ─── */
+.fade-up {
+  opacity: 0; transform: translateY(30px); transition: opacity 0.6s, transform 0.6s;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── MODAL ─── */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 2000;
+  display: none; align-items: center; justify-content: center; padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--navy2); border: 1px solid var(--glass-border);
+  border-radius: 20px; padding: 40px; max-width: 500px; width: 100%;
+  position: relative; max-height: 90vh; overflow-y: auto;
+}
+.modal-close {
+  position: absolute; top: 16px; right: 16px; background: none; border: none;
+  color: var(--gray); font-size: 24px; cursor: pointer; transition: color 0.2s;
+}
+.modal-close:hover { color: var(--orange); }
+.modal h3 { font-family: 'Bebas Neue', sans-serif; font-size: 32px; margin-bottom: 24px; }
+
+/* ─── WHATSAPP FLOAT ─── */
+.wa-float {
+  position: fixed; bottom: 30px; right: 30px; z-index: 999;
+  background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-size: 28px;
+  box-shadow: 0 6px 24px rgba(37,211,102,0.4); text-decoration: none;
+  animation: wa-pulse 2s infinite;
+  transition: transform 0.2s;
+}
+.wa-float:hover { transform: scale(1.1); }
+@keyframes wa-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.4); }
+  70% { box-shadow: 0 0 0 15px rgba(37,211,102,0); }
+  100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+}
+
+/* ─── LANGUAGE TOGGLE ─── */
+.lang-btn {
+  background: rgba(255,255,255,0.08); border: 1px solid var(--glass-border);
+  color: white; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600;
+  cursor: pointer; letter-spacing: 1px; transition: all 0.2s;
+}
+.lang-btn:hover { border-color: var(--orange); color: var(--orange); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  .hero-content { grid-template-columns: 1fr; }
+  .booking-card { max-width: 100%; }
+  .calc-grid, .track-container, .contact-grid { grid-template-columns: 1fr; }
+  .trust-grid, .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+  .admin-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .dash-layout { grid-template-columns: 1fr; }
+  .dash-sidebar { display: none; }
+  .admin-lower { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hero-content { padding: 100px 20px 60px; }
+  .section { padding: 60px 20px; }
+  #fleet .inner, #coverage .inner, #calculator .inner, #tracking .inner, #trust .inner, #payment .inner, #dashboard .inner, #admin .inner, #contact .inner, #reviews .inner { padding: 0 20px; }
+  .trust-grid, .reviews-grid { grid-template-columns: 1fr; }
+  .admin-grid, .dash-cards { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr; }
+  .counter-strip .inner { grid-template-columns: repeat(2, 1fr); }
+  .hero-stats { gap: 20px; }
+  .fleet-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════ PORTFOLIO ═══════════════════════════════ -->
+
+  <!-- NAVIGATION -->
+  <nav id="navbar">
+    <a class="nav-logo" href="#hero">Shahab.</a>
+    <button class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#social">Social</a></li>
+      <li><a href="#cv">Resume</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section id="hero">
+    <div class="hero-inner fade-in">
+      <div class="hero-avatar">
+        <div class="avatar-ring">
+          <div class="avatar-placeholder"><i class="fa-solid fa-user"></i></div>
+        </div>
+        <span class="avatar-badge">Open to Work</span>
+      </div>
+      <div class="hero-text">
+        <p class="hero-greeting">Assalamualaikum</p>
+        <h1 class="hero-name"><span>sHaHaB UdDiN</span></h1>
+        <p class="hero-role">Student of Artificial Intelligence · Machine Learning</p>
+        <p class="hero-bio">Artificial Intelligence and Machine Learning student passionate about designing intelligent systems using Python, Deep Learning, and advanced algorithms.</p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn-primary"><i class="fa-solid fa-envelope"></i> Get In Touch</a>
+          <a href="#about" class="btn-ghost"><i class="fa-solid fa-arrow-down"></i> Learn More</a>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <i class="fa-solid fa-chevron-down"></i>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section id="about">
+    <span class="section-label">Get to Know Me</span>
+    <h2 class="section-title">About Me</h2>
+    <div class="divider"></div>
+    <div class="about-grid fade-in">
+      <div class="about-text">
+        <p>Hi! I'm a dedicated student studying Artificial Intelligence at <strong>Abdul Wali Khan University</strong>.</p>
+        <p>I love turning ideas into clean, functional digital products.</p>
+        <p>Outside of coding, I enjoy photography and contributing to open-source projects.</p>
+        <div class="skills-grid">
+          <span class="skill-tag">Machine Learning</span>
+          <span class="skill-tag">Deep Learning</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">HTML & CSS</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">Git & GitHub</span>
+        </div>
+      </div>
+      <div class="stats-col">
+        <div class="stat-card"><h3>3+</h3><p>Years of coding experience</p></div>
+        <div class="stat-card"><h3>12+</h3><p>Projects completed</p></div>
+        <div class="stat-card"><h3>5+</h3><p>Technologies mastered</p></div>
+        <div class="stat-card"><h3>2027</h3><p>Expected graduation year</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS SECTION -->
+  <section id="projects">
+    <span class="section-label">What I've Built</span>
+    <h2 class="section-title">My Projects</h2>
+    <div class="divider"></div>
+    <div class="projects-grid fade-in">
+
+      <div class="project-card">
+        <div class="project-top">
+          <div class="project-icon ml-icon"><i class="fa-solid fa-brain"></i></div>
+          <div class="project-links">
+            <button onclick="openModal('ml')" class="project-link" title="View Project">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </button>
+          </div>
+        </div>
+        <h3 class="project-title">ML Roadmap – Interactive</h3>
+        <p class="project-desc">An interactive Machine Learning roadmap with a futuristic UI. Covers all key ML topics with detailed explanations and a sidebar navigation system.</p>
+        <div class="project-tags">
+          <span class="project-tag">Machine Learning</span>
+          <span class="project-tag">JavaScript</span>
+          <span class="project-tag">HTML/CSS</span>
+          <span class="project-tag">Interactive UI</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-top">
+          <div class="project-icon tr-icon"><i class="fa-solid fa-truck-fast"></i></div>
+          <div class="project-links">
+            <button onclick="openModal('tr')" class="project-link" title="View Project">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </button>
+          </div>
+        </div>
+        <h3 class="project-title">Badshah Transport System</h3>
+        <p class="project-desc">A premium logistics and transport web platform for Pakistan with modern design, booking system UI, service listings, and fully responsive layout.</p>
+        <div class="project-tags">
+          <span class="project-tag">Web Design</span>
+          <span class="project-tag">HTML/CSS</span>
+          <span class="project-tag">JavaScript</span>
+          <span class="project-tag">Responsive</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SOCIAL LINKS SECTION -->
+  <section id="social">
+    <span class="section-label">Find Me Online</span>
+    <h2 class="section-title">My Social Links</h2>
+    <div class="divider"></div>
+    <div class="social-grid fade-in">
+      <a href="https://www.facebook.com/shahab.shah.628875" target="_blank" class="social-card fb">
+        <div class="social-icon"><i class="fa-brands fa-facebook-f"></i></div>
+        <span class="social-name">Facebook</span>
+        <span class="social-handle">@Shahab Shah</span>
+      </a>
+      <a href="https://wa.me/923229086360" target="_blank" class="social-card wa">
+        <div class="social-icon"><i class="fa-brands fa-whatsapp"></i></div>
+        <span class="social-name">WhatsApp</span>
+        <span class="social-handle">Chat with me</span>
+      </a>
+      <a href="https://www.linkedin.com/in/shahab-uddin-180607358/" target="_blank" class="social-card li">
+        <div class="social-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+        <span class="social-name">LinkedIn</span>
+        <span class="social-handle">@Shahab Uddin</span>
+      </a>
+      <a href="https://github.com/SHAHAB-UDDIN54" target="_blank" class="social-card gh">
+        <div class="social-icon"><i class="fa-brands fa-github"></i></div>
+        <span class="social-name">GitHub</span>
+        <span class="social-handle">@Shahab Uddin</span>
+      </a>
+      <a href="http://www.youtube.com/@Captainshahab54" target="_blank" class="social-card yt">
+        <div class="social-icon"><i class="fa-brands fa-youtube"></i></div>
+        <span class="social-name">YouTube</span>
+        <span class="social-handle">@Ai with Shah</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- CV SECTION -->
+  <section id="cv">
+    <span class="section-label">My Resume</span>
+    <h2 class="section-title">Download CV</h2>
+    <div class="divider"></div>
+    <div class="cv-card fade-in">
+      <div class="cv-info">
+        <h3>Curriculum Vitae</h3>
+        <p>Download my latest resume to learn more about my background and skills.</p>
+        <div class="cv-meta">
+          <span><i class="fa-solid fa-file-pdf"></i> PDF Format</span>
+          <span><i class="fa-solid fa-calendar"></i> Updated Jan 2026</span>
+        </div>
+      </div>
+      <a href="./Shahab_Uddin_CV__1_.pdf" download class="btn-primary">
+        <i class="fa-solid fa-download"></i> Download CV
+      </a>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact">
+    <span class="section-label">Reach Out</span>
+    <h2 class="section-title">Contact Me</h2>
+    <div class="divider"></div>
+    <div class="contact-grid fade-in">
+      <a href="mailto:ccaptainshahab@gmail.com" class="contact-card">
+        <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+        <div class="contact-info">
+          <label>Email Address</label>
+          <span>ccaptainshahab@gmail.com</span>
+        </div>
+      </a>
+      <a href="tel:+923005430123" class="contact-card">
+        <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+        <div class="contact-info">
+          <label>Phone Number</label>
+          <span>+92 (300) 543-0123</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 <span>Shahab</span>. All rights reserved.</p>
+    <nav class="footer-links">
+      <a href="#hero">Home</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </footer>
+
+  <!-- ═══════════════════════ ML PROJECT MODAL ═══════════════════════ -->
+  <div class="modal-overlay" id="modal-ml">
+    <button class="modal-close" onclick="closeModal('ml')">✕</button>
+    <div class="modal-frame">
+
+<div class="grid-bg"></div>
+<div class="scanlines"></div>
+<div class="corner c-tl"></div><div class="corner c-tr"></div>
+<div class="corner c-bl"></div><div class="corner c-br"></div>
+
+<!-- Robot background -->
+<svg class="robot-silhouette" viewBox="0 0 500 550" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" stroke="#00d4e8" stroke-width="1.5">
+    <line x1="250" y1="0" x2="250" y2="40"/><circle cx="250" cy="15" r="12" fill="rgba(0,212,232,0.2)"/>
+    <rect x="100" y="42" width="300" height="220" rx="22"/>
+    <rect x="135" y="80" width="85" height="60" rx="10" fill="rgba(0,212,232,0.12)"/>
+    <rect x="280" y="80" width="85" height="60" rx="10" fill="rgba(0,212,232,0.12)"/>
+    <circle cx="177" cy="110" r="22" fill="rgba(0,212,232,0.3)"/>
+    <circle cx="323" cy="110" r="22" fill="rgba(0,212,232,0.3)"/>
+    <circle cx="177" cy="110" r="10"/>
+    <circle cx="323" cy="110" r="10"/>
+    <rect x="150" y="180" width="200" height="36" rx="5"/>
+    <line x1="178" y1="180" x2="178" y2="216"/>
+    <line x1="210" y1="180" x2="210" y2="216"/>
+    <line x1="250" y1="180" x2="250" y2="216"/>
+    <line x1="290" y1="180" x2="290" y2="216"/>
+    <line x1="322" y1="180" x2="322" y2="216"/>
+    <rect x="200" y="262" width="100" height="36" rx="4"/>
+    <rect x="60" y="298" width="380" height="260" rx="16"/>
+    <rect x="100" y="330" width="130" height="90" rx="6"/>
+    <rect x="270" y="330" width="130" height="90" rx="6"/>
+    <circle cx="250" cy="490" r="40"/><circle cx="250" cy="490" r="22"/>
+    <rect x="0" y="298" width="56" height="180" rx="16"/>
+    <rect x="444" y="298" width="56" height="180" rx="16"/>
+    <circle cx="28" cy="496" r="28"/><circle cx="472" cy="496" r="28"/>
+  </g>
+</svg>
+
+<div class="app">
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">ML Roadmap</div>
+      <div class="sidebar-sub">▸ Click any topic to learn ◂</div>
+    </div>
+    <div id="phase-list"></div>
+  </div>
+
+  <!-- MAIN PANEL -->
+  <div class="main-panel">
+    <!-- Welcome screen -->
+    <div class="welcome" id="welcome">
+      <div class="welcome-robot">
+        <svg width="90" height="90" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="#00d4e8" stroke-width="1.8">
+            <line x1="45" y1="4" x2="45" y2="14"/><circle cx="45" cy="7" r="5" fill="rgba(0,212,232,0.3)"/>
+            <rect x="12" y="16" width="66" height="52" rx="10" fill="rgba(0,212,232,0.06)"/>
+            <rect x="20" y="28" width="20" height="15" rx="5" fill="rgba(0,212,232,0.18)"/>
+            <rect x="50" y="28" width="20" height="15" rx="5" fill="rgba(0,212,232,0.18)"/>
+            <circle cx="30" cy="35" r="6" fill="rgba(0,212,232,0.5)"/>
+            <circle cx="60" cy="35" r="6" fill="rgba(0,212,232,0.5)"/>
+            <rect x="24" y="52" width="42" height="10" rx="3"/>
+            <line x1="30" y1="52" x2="30" y2="62"/>
+            <line x1="38" y1="52" x2="38" y2="62"/>
+            <line x1="45" y1="52" x2="45" y2="62"/>
+            <line x1="52" y1="52" x2="52" y2="62"/>
+            <line x1="60" y1="52" x2="60" y2="62"/>
+            <rect x="3" y="32" width="9" height="22" rx="4"/>
+            <rect x="78" y="32" width="9" height="22" rx="4"/>
+          </g>
+        </svg>
+      </div>
+      <div class="welcome-title">Machine Learning<br>Interactive Guide</div>
+      <div class="welcome-sub">Every topic explained with definitions, types, real-world examples, and key concepts. Click any topic from the sidebar to begin.</div>
+      <div class="welcome-hint">▸ SELECT A TOPIC FROM THE LEFT PANEL ◂</div>
+    </div>
+    <!-- Detail panel -->
+    <div class="topic-detail" id="topic-detail"></div>
+  </div>
+</div>
+
+<script>
+const phases = [
+  {
+    id:"p1", name:"Math & Programming", color:"#00d4e8", topics:[
+      {id:"what-is-ml", name:"What is Machine Learning?"},
+      {id:"types-of-ml", name:"Types of Machine Learning"},
+      {id:"linear-algebra", name:"Linear Algebra"},
+      {id:"calculus", name:"Calculus for ML"},
+      {id:"statistics", name:"Statistics & Probability"},
+      {id:"python", name:"Python for ML"},
+      {id:"numpy", name:"NumPy"},
+      {id:"pandas", name:"Pandas"},
+    ]
+  },
+  {
+    id:"p2", name:"Classical ML Algorithms", color:"#00e67a", topics:[
+      {id:"linear-regression", name:"Linear Regression"},
+      {id:"logistic-regression", name:"Logistic Regression"},
+      {id:"decision-trees", name:"Decision Trees"},
+      {id:"random-forest", name:"Random Forest"},
+      {id:"svm", name:"Support Vector Machines"},
+      {id:"knn", name:"K-Nearest Neighbors"},
+      {id:"kmeans", name:"K-Means Clustering"},
+      {id:"feature-engineering", name:"Feature Engineering"},
+      {id:"model-evaluation", name:"Model Evaluation"},
+    ]
+  },
+  {
+    id:"p3", name:"Deep Learning", color:"#ff6b35", topics:[
+      {id:"neural-networks", name:"Neural Networks (ANN)"},
+      {id:"backpropagation", name:"Backpropagation"},
+      {id:"cnn", name:"Convolutional Networks (CNN)"},
+      {id:"rnn", name:"RNN & LSTM"},
+      {id:"activation-functions", name:"Activation Functions"},
+      {id:"optimizers", name:"Optimizers (Adam, SGD)"},
+      {id:"pytorch", name:"PyTorch Framework"},
+      {id:"transfer-learning", name:"Transfer Learning"},
+    ]
+  },
+  {
+    id:"p4", name:"Specializations", color:"#7c3aed", topics:[
+      {id:"computer-vision", name:"Computer Vision"},
+      {id:"nlp", name:"Natural Language Processing"},
+      {id:"transformers", name:"Transformers & Attention"},
+      {id:"generative-ai", name:"Generative AI (GANs)"},
+      {id:"diffusion", name:"Diffusion Models"},
+      {id:"reinforcement", name:"Reinforcement Learning"},
+    ]
+  },
+  {
+    id:"p5", name:"MLOps & Deployment", color:"#e11d48", topics:[
+      {id:"docker", name:"Docker & Containers"},
+      {id:"fastapi", name:"REST APIs with FastAPI"},
+      {id:"mlflow", name:"MLflow & Experiment Tracking"},
+      {id:"cloud-ml", name:"Cloud ML Platforms"},
+      {id:"model-monitoring", name:"Model Monitoring"},
+    ]
+  },
+  {
+    id:"p6", name:"Projects & Career", color:"#f59e0b", topics:[
+      {id:"kaggle", name:"Kaggle Competitions"},
+      {id:"portfolio", name:"Building Your Portfolio"},
+      {id:"papers", name:"Reading Research Papers"},
+      {id:"interview", name:"ML Interview Prep"},
+    ]
+  }
+];
+
+const content = {
+  "what-is-ml":{
+    title:"What is Machine Learning?",
+    badge:"Foundation",
+    intro:`Machine learning is a branch of <b>Artificial Intelligence</b> where computers learn from data to make decisions or predictions — without being explicitly programmed for every rule. Instead of writing step-by-step instructions, we feed the machine examples and it figures out the patterns on its own.`,
+    sections:[
+      {label:"Simple Analogy",type:"text",content:`Imagine teaching a child to recognize cats. You don't explain every rule (4 legs, furry, meows). You just show thousands of cat photos, and the child learns the pattern. Machine learning works the same way — show data, learn patterns, make predictions.`},
+      {label:"How it differs from traditional programming",type:"list",items:[
+        "Traditional programming: You write rules → machine follows them → output",
+        "Machine learning: You give data + output → machine learns the rules → applies to new data",
+        "ML excels when rules are too complex or unknown (like recognizing faces)",
+        "ML needs large amounts of quality data to work well"
+      ]},
+      {label:"Real-World Applications",type:"tags",items:["Spam Detection","Face Recognition","Netflix Recommendations","Self-driving Cars","Medical Diagnosis","Voice Assistants","Stock Prediction","Fraud Detection"]},
+      {label:"Core Components",type:"cards",items:[
+        {title:"Data",text:"The fuel. Historical examples the model learns from — images, text, numbers, etc."},
+        {title:"Model",text:"The mathematical function that maps inputs to outputs. It learns from data."},
+        {title:"Training",text:"The process of adjusting the model's internal parameters using data."},
+        {title:"Prediction",text:"Using the trained model on new, unseen data to make decisions."}
+      ]}
+    ]
+  },
+  "types-of-ml":{
+    title:"Types of Machine Learning",
+    badge:"Core Concept",
+    intro:`Machine learning is broadly divided into <b>three main types</b> based on how the model learns from data — supervised, unsupervised, and reinforcement learning. Each suits different types of problems.`,
+    sections:[
+      {label:"The 3 Main Types",type:"cards",items:[
+        {title:"Supervised Learning",text:"Learn from labeled data. Input-output pairs provided. Goal: predict output for new input. E.g. email = spam/not spam."},
+        {title:"Unsupervised Learning",text:"No labels provided. Find hidden patterns or groupings in data. E.g. customer segmentation, topic modeling."},
+        {title:"Reinforcement Learning",text:"Agent learns by trial and error via rewards/penalties. E.g. game-playing AI, robot navigation."}
+      ]},
+      {label:"Supervised Learning — deeper look",type:"text",content:`In supervised learning, every training example has an <b>input</b> and a known <b>correct output</b> (label). Two main tasks: <b>Classification</b> (predict a category: cat/dog, spam/not) and <b>Regression</b> (predict a number: house price, temperature).`},
+      {label:"Unsupervised Learning — deeper look",type:"text",content:`No labels needed! The algorithm finds structure in raw data. Main tasks: <b>Clustering</b> (group similar things), <b>Dimensionality Reduction</b> (simplify data), and <b>Anomaly Detection</b> (find unusual patterns).`},
+      {label:"Also worth knowing",type:"list",items:[
+        "Semi-supervised learning: small amount of labeled data + large unlabeled dataset",
+        "Self-supervised learning: model creates its own labels from data (used in GPT, BERT)",
+        "Online learning: model updates continuously as new data arrives",
+        "Federated learning: model trains across many devices without sharing raw data"
+      ]},
+      {label:"Quick Comparison",type:"table",headers:["Type","Labels needed?","Example task","Example algorithm"],rows:[
+        ["Supervised","Yes","Predict house price","Linear Regression"],
+        ["Unsupervised","No","Group customers","K-Means"],
+        ["Reinforcement","Rewards only","Play chess","Q-Learning / PPO"]
+      ]}
+    ]
+  },
+  "linear-algebra":{
+    title:"Linear Algebra for ML",
+    badge:"Math Foundation",
+    intro:`Linear algebra is the <b>language of machine learning</b>. Data is stored in matrices, model weights are vectors, and almost every computation — forward pass, gradient update, image processing — is linear algebra under the hood.`,
+    sections:[
+      {label:"Key Concepts",type:"list",items:[
+        "Scalar — a single number (e.g. 5, 3.14)",
+        "Vector — a 1D array of numbers. Represents a data point or weights (e.g. [2, 4, 7])",
+        "Matrix — a 2D grid of numbers. A dataset with rows=samples, cols=features",
+        "Tensor — ND array. Used in deep learning. A color image is a 3D tensor (H × W × 3)",
+        "Dot product — multiplying corresponding elements and summing. Central to neural nets",
+        "Matrix multiplication — transforms data; the core of every layer in a neural network",
+        "Transpose — flip rows and columns of a matrix",
+        "Eigenvalues & Eigenvectors — key in PCA (dimensionality reduction)"
+      ]},
+      {label:"Why it matters in ML",type:"cards",items:[
+        {title:"Data representation",text:"Every dataset is a matrix. Rows are examples, columns are features."},
+        {title:"Neural networks",text:"Each layer performs matrix multiply + activation. Forward pass = chain of matrix ops."},
+        {title:"PCA / SVD",text:"Decomposing matrices reveals the most important directions in your data."}
+      ]},
+      {label:"Example",type:"example",label2:"A neural network layer",content:"If your input is a vector x (1×n), and the weight matrix W is (n×m), then the layer output is: y = x · W + b. That's just matrix multiplication!"}
+    ]
+  },
+  "calculus":{
+    title:"Calculus for ML",
+    badge:"Math Foundation",
+    intro:`In ML, calculus is used to <b>train models</b>. We use derivatives to find how much each parameter contributes to the error, then adjust parameters to reduce it. This process is called <b>gradient descent</b>.`,
+    sections:[
+      {label:"Key Concepts",type:"list",items:[
+        "Derivative — rate of change of a function. dL/dw tells us how loss changes with weight w",
+        "Partial derivative — derivative with respect to one variable while others are fixed",
+        "Gradient — vector of all partial derivatives. Points in direction of steepest increase",
+        "Chain rule — how to differentiate composed functions. Essential for backpropagation",
+        "Loss function — a function measuring how wrong our model is. We want to minimize it",
+        "Gradient descent — iteratively move parameters in the -gradient direction to reduce loss"
+      ]},
+      {label:"Gradient Descent — the core idea",type:"text",content:`Imagine you're on a hilly landscape and you want to reach the lowest point blindfolded. You feel the slope under your feet and take a step in the downhill direction. Repeat until you reach the bottom. That's gradient descent — we use derivatives to 'feel the slope' of the loss function and take steps to minimize it.`},
+      {label:"Example",type:"example",label2:"Weight update rule",content:"new_weight = old_weight − learning_rate × gradient. The gradient tells us which direction increases loss; we go the opposite way to decrease it."}
+    ]
+  },
+  "statistics":{
+    title:"Statistics & Probability",
+    badge:"Math Foundation",
+    intro:`Statistics helps us <b>understand data</b> and <b>quantify uncertainty</b>. Probability is the language models use to express confidence in predictions.`,
+    sections:[
+      {label:"Key Statistics Concepts",type:"list",items:[
+        "Mean / Median / Mode — measures of central tendency",
+        "Variance & Standard Deviation — how spread out the data is",
+        "Normal Distribution — the famous bell curve. Many real phenomena follow it",
+        "Correlation — how two variables move together (−1 to +1)",
+        "Hypothesis Testing — is an observed effect real or just random noise?",
+        "p-value — probability of seeing results as extreme as yours under the null hypothesis"
+      ]},
+      {label:"Key Probability Concepts",type:"list",items:[
+        "Probability — measure of how likely an event is (0 to 1)",
+        "Conditional Probability P(A|B) — probability of A given B already happened",
+        "Bayes' Theorem — update beliefs with new evidence. Foundation of Naive Bayes",
+        "Probability Distribution — describes likelihood of all possible outcomes",
+        "Expected Value — average outcome if we ran an experiment many times",
+        "Maximum Likelihood Estimation (MLE) — find parameters that make data most probable"
+      ]},
+      {label:"Why it matters",type:"tags",items:["Model evaluation","Confidence intervals","A/B testing","Bayesian models","Handling uncertainty","Class imbalance","Feature selection"]}
+    ]
+  },
+  "python":{
+    title:"Python for ML",
+    badge:"Programming",
+    intro:`Python is the <b>#1 language for machine learning</b> due to its simple syntax, massive ecosystem of ML libraries, and huge community. Almost all major ML frameworks (TensorFlow, PyTorch, Scikit-Learn) have Python APIs.`,
+    sections:[
+      {label:"Core Python Skills for ML",type:"list",items:[
+        "Data structures — lists, dicts, tuples, sets for storing and processing data",
+        "List comprehensions — clean, fast way to transform data",
+        "Functions & lambdas — reusable code blocks, map/filter operations",
+        "Classes & OOP — many ML frameworks use object-oriented patterns",
+        "File I/O — reading CSV, JSON, text files into Python",
+        "Error handling — try/except to handle bad data gracefully",
+        "Virtual environments — isolate project dependencies with venv or conda"
+      ]},
+      {label:"Essential ML Libraries",type:"cards",items:[
+        {title:"NumPy",text:"Fast numerical arrays. Foundation of nearly every ML library."},
+        {title:"Pandas",text:"DataFrames for data loading, cleaning, and exploration."},
+        {title:"Matplotlib / Seaborn",text:"Plotting and data visualization."},
+        {title:"Scikit-Learn",text:"Classical ML: regression, classification, clustering, preprocessing."},
+        {title:"PyTorch / TensorFlow",text:"Deep learning frameworks for building neural networks."},
+        {title:"Jupyter Notebook",text:"Interactive coding environment, great for experimentation."}
+      ]}
+    ]
+  },
+  "numpy":{
+    title:"NumPy",
+    badge:"Python Library",
+    intro:`NumPy (Numerical Python) provides <b>fast multi-dimensional arrays</b> called ndarrays. It's the foundation of the entire scientific Python ecosystem. Nearly every ML library uses NumPy arrays internally.`,
+    sections:[
+      {label:"Core Features",type:"list",items:[
+        "ndarray — N-dimensional array, much faster than Python lists",
+        "Vectorized operations — apply math to entire arrays without Python loops",
+        "Broadcasting — operate on arrays of different shapes automatically",
+        "Array slicing & indexing — select subsets of data elegantly",
+        "Linear algebra — dot products, matrix multiply, eigenvalues, SVD",
+        "Random module — generate random data, set seeds for reproducibility"
+      ]},
+      {label:"Why it's fast",type:"text",content:`NumPy arrays are stored as <b>contiguous blocks of memory</b> in C (not Python objects). Operations run in compiled C code, often using SIMD/vectorized CPU instructions. A NumPy operation on 1 million elements can be 100× faster than a Python loop.`},
+      {label:"Example",type:"example",label2:"Vectorized vs loop",content:"Python loop: for i in range(1000000): result[i] = a[i] + b[i]\nNumPy: result = a + b   ← same result, ~100x faster!"}
+    ]
+  },
+  "pandas":{
+    title:"Pandas",
+    badge:"Python Library",
+    intro:`Pandas provides the <b>DataFrame</b> — a table structure (like Excel or SQL) in Python. It's essential for loading, cleaning, exploring, and preprocessing real-world datasets before feeding them to ML models.`,
+    sections:[
+      {label:"Key Data Structures",type:"cards",items:[
+        {title:"Series",text:"1D labeled array. Like a single column in a spreadsheet. Has index + values."},
+        {title:"DataFrame",text:"2D table with rows and named columns. This is what you'll use for datasets."}
+      ]},
+      {label:"Core Operations",type:"list",items:[
+        "read_csv / read_json — load data from files into a DataFrame",
+        "head() / info() / describe() — quickly explore your data",
+        "dropna() / fillna() — handle missing values",
+        "groupby() — group rows and compute aggregates (sum, mean, count)",
+        "merge() / join() — combine multiple DataFrames like SQL JOIN",
+        "apply() — apply a custom function to each row or column",
+        "value_counts() — frequency of each unique value in a column"
+      ]},
+      {label:"ML Workflow with Pandas",type:"text",content:`Load CSV → inspect shape and types → handle missing values → encode categorical columns → select features → split into X (features) and y (target) → hand off to Scikit-Learn or PyTorch for training.`}
+    ]
+  },
+  "linear-regression":{
+    title:"Linear Regression",
+    badge:"Supervised Learning",
+    intro:`Linear regression is the <b>simplest and most foundational ML algorithm</b>. It models the relationship between input features and a continuous output (number) by fitting a straight line (or hyperplane) through the data.`,
+    sections:[
+      {label:"The Core Idea",type:"text",content:`We want to predict a number (house price, temperature, salary). We assume the output is a <b>linear combination</b> of inputs: y = w₁x₁ + w₂x₂ + ... + b. Training finds the weights w and bias b that minimize the difference between predictions and real values.`},
+      {label:"Key Concepts",type:"list",items:[
+        "Hypothesis function: ŷ = Wx + b (the model's prediction)",
+        "Loss function: Mean Squared Error (MSE) = average of (ŷ − y)²",
+        "Optimization: Gradient Descent minimizes the MSE by updating W and b",
+        "Underfitting: model too simple, high training error",
+        "Overfitting: model memorizes training data, fails on new data",
+        "Regularization (L1/L2): penalty term to prevent overfitting"
+      ]},
+      {label:"Real Examples",type:"tags",items:["House price prediction","Sales forecasting","Temperature prediction","Ad spend vs revenue","Age vs salary"]},
+      {label:"When to use it",type:"text",content:`Use linear regression when: the relationship between input and output is roughly linear, you need an interpretable model, you want a fast baseline. It's often the first model to try before moving to complex algorithms.`}
+    ]
+  },
+  "logistic-regression":{
+    title:"Logistic Regression",
+    badge:"Supervised Learning",
+    intro:`Despite the name, logistic regression is a <b>classification</b> algorithm. It predicts the probability that an input belongs to a particular class (Yes/No, Spam/Not, Disease/Healthy).`,
+    sections:[
+      {label:"How it works",type:"text",content:`Logistic regression applies the <b>sigmoid function</b> to linear regression output: P(y=1) = 1 / (1 + e^(−z)). The sigmoid squashes any real number into the range (0,1), giving us a probability. We then choose a threshold (usually 0.5) to decide the class.`},
+      {label:"Key Concepts",type:"list",items:[
+        "Sigmoid function — converts linear output to probability (0 to 1)",
+        "Decision boundary — threshold that separates classes",
+        "Binary classification — two classes (yes/no)",
+        "Multiclass — One-vs-Rest or Softmax for 3+ classes",
+        "Log loss (cross-entropy) — the loss function used for training",
+        "Odds ratio — how features change the odds of the outcome"
+      ]},
+      {label:"Real Examples",type:"tags",items:["Email spam detection","Cancer diagnosis","Credit default prediction","Customer churn","Login fraud detection"]},
+      {label:"vs Linear Regression",type:"table",headers:["","Linear Regression","Logistic Regression"],rows:[
+        ["Output","Continuous number","Probability (0–1)"],
+        ["Task","Regression","Classification"],
+        ["Loss function","MSE","Log loss (cross-entropy)"],
+        ["Output activation","None","Sigmoid"]
+      ]}
+    ]
+  },
+  "decision-trees":{
+    title:"Decision Trees",
+    badge:"Supervised Learning",
+    intro:`A decision tree is a <b>flowchart-like model</b> that makes decisions by asking a series of yes/no questions about features. It's intuitive, interpretable, and works for both classification and regression.`,
+    sections:[
+      {label:"How it works",type:"text",content:`At each node, the tree splits the data based on the feature and threshold that best separates the classes. It asks questions like: "Is age > 30? → Yes → Is income > 50k? → No → Predict: No Loan." The tree keeps splitting until it reaches a leaf node with a prediction.`},
+      {label:"Key Terms",type:"list",items:[
+        "Root node — the first split, chosen by the most informative feature",
+        "Internal nodes — subsequent decision points",
+        "Leaf nodes — final predictions (class or value)",
+        "Depth — how many levels of splits. Deeper = more complex",
+        "Gini impurity — measures how mixed the classes are at a node",
+        "Information gain — how much a split reduces uncertainty (entropy)",
+        "Pruning — cutting branches to reduce overfitting"
+      ]},
+      {label:"Pros & Cons",type:"cards",items:[
+        {title:"Pros",text:"Highly interpretable. No feature scaling needed. Handles mixed data types. Fast to train."},
+        {title:"Cons",text:"Prone to overfitting. Small data changes can drastically change the tree. Biased with imbalanced classes."}
+      ]}
+    ]
+  },
+  "random-forest":{
+    title:"Random Forest",
+    badge:"Ensemble Method",
+    intro:`Random Forest is an <b>ensemble of decision trees</b>. Instead of one tree, it builds hundreds of trees on random subsets of data and features, then averages their predictions. This makes it far more robust and accurate than a single tree.`,
+    sections:[
+      {label:"Core Idea: Bagging",type:"text",content:`Each tree is trained on a <b>bootstrap sample</b> (random sample with replacement) of the training data. At each split, only a random subset of features is considered. Trees are independent and diverse. Final prediction = majority vote (classification) or average (regression).`},
+      {label:"Why it works",type:"list",items:[
+        "Variance reduction: averaging many trees reduces overfitting",
+        "Feature randomness: ensures trees are diverse, not correlated",
+        "Out-of-bag error: free validation using samples not in each tree's bootstrap",
+        "Feature importance: easily ranks which features matter most"
+      ]},
+      {label:"Real Examples",type:"tags",items:["Credit risk scoring","Medical diagnosis","Stock movement","Customer lifetime value","Anomaly detection"]},
+      {label:"vs Single Decision Tree",type:"table",headers:["","Decision Tree","Random Forest"],rows:[
+        ["Accuracy","Medium","High"],
+        ["Overfitting","High risk","Low risk"],
+        ["Training time","Fast","Slower (100s of trees)"],
+        ["Interpretability","High","Medium (feature importance)"]
+      ]}
+    ]
+  },
+  "svm":{
+    title:"Support Vector Machines",
+    badge:"Supervised Learning",
+    intro:`SVM finds the <b>optimal hyperplane</b> that maximally separates two classes. It focuses on the most difficult points near the boundary — the "support vectors" — making it powerful for high-dimensional data.`,
+    sections:[
+      {label:"Key Concepts",type:"list",items:[
+        "Hyperplane — a decision boundary in N dimensions (line in 2D, plane in 3D)",
+        "Margin — distance between the hyperplane and nearest data points",
+        "Support vectors — the data points closest to the boundary (they define it)",
+        "Maximum margin — SVM finds the hyperplane maximizing the margin",
+        "Kernel trick — maps data to higher dimensions to find linear separation",
+        "C parameter — controls tradeoff between margin width and misclassifications",
+        "Soft margin — allows some misclassifications for better generalization"
+      ]},
+      {label:"Kernels",type:"cards",items:[
+        {title:"Linear kernel",text:"Straight line boundary. Works when data is linearly separable."},
+        {title:"RBF (Gaussian)",text:"Most popular. Creates curved boundaries using Euclidean distance."},
+        {title:"Polynomial",text:"Curved boundaries using polynomial features. Good for specific patterns."}
+      ]},
+      {label:"When to use SVM",type:"text",content:`SVM works well when: you have high-dimensional data (text classification), your dataset is small-to-medium sized, you need a robust classifier. It struggles with very large datasets (slow training) and requires careful kernel/parameter selection.`}
+    ]
+  },
+  "knn":{
+    title:"K-Nearest Neighbors (KNN)",
+    badge:"Supervised Learning",
+    intro:`KNN is the simplest ML algorithm — <b>no training needed</b>. To predict, it finds the K closest examples in the training set and returns the majority class (or average value for regression).`,
+    sections:[
+      {label:"How it works",type:"list",items:[
+        "Store all training data (lazy learning — no model is built)",
+        "For a new point, compute distance to all training points",
+        "Find the K nearest neighbors",
+        "Classification: return the majority class among K neighbors",
+        "Regression: return the average value among K neighbors",
+        "Common distance metrics: Euclidean, Manhattan, Cosine similarity"
+      ]},
+      {label:"Choosing K",type:"text",content:`<b>Small K</b> (K=1): very sensitive to noise, complex boundary, overfits. <b>Large K</b>: smoother boundary, may miss patterns, underfits. Typically choose K via cross-validation. Rule of thumb: K = √(number of samples).`},
+      {label:"Pros & Cons",type:"cards",items:[
+        {title:"Pros",text:"Simple to understand. No training time. Naturally handles multi-class. Adapts to new data instantly."},
+        {title:"Cons",text:"Slow prediction (compute all distances). Bad with high dimensions (curse of dimensionality). Needs feature scaling!"}
+      ]}
+    ]
+  },
+  "kmeans":{
+    title:"K-Means Clustering",
+    badge:"Unsupervised Learning",
+    intro:`K-Means groups data into <b>K clusters</b> by finding K centroids that minimize the total distance from each point to its nearest centroid. It's the most popular unsupervised learning algorithm.`,
+    sections:[
+      {label:"The Algorithm (4 steps)",type:"list",items:[
+        "1. Initialize: randomly place K centroids in the data space",
+        "2. Assign: assign each data point to the nearest centroid",
+        "3. Update: move each centroid to the mean of its assigned points",
+        "4. Repeat steps 2–3 until centroids stop moving (convergence)"
+      ]},
+      {label:"Choosing K",type:"text",content:`The <b>Elbow Method</b>: plot inertia (total within-cluster distance) vs K. The 'elbow' point where improvement slows suggests the best K. The <b>Silhouette score</b> measures how similar a point is to its own cluster vs others (higher = better).`},
+      {label:"Real Examples",type:"tags",items:["Customer segmentation","Image compression","Document clustering","Market segmentation","Anomaly detection","Gene expression analysis"]},
+      {label:"Limitations",type:"list",items:[
+        "Must specify K in advance (not always obvious)",
+        "Assumes spherical, equally sized clusters",
+        "Sensitive to outliers (they pull centroids)",
+        "May converge to local minimum (run multiple times)"
+      ]}
+    ]
+  },
+  "feature-engineering":{
+    title:"Feature Engineering",
+    badge:"Data Preprocessing",
+    intro:`Feature engineering is the art of <b>transforming raw data into useful inputs</b> for ML models. It's often the most impactful step — better features beat better algorithms. Garbage in, garbage out.`,
+    sections:[
+      {label:"Key Techniques",type:"list",items:[
+        "Normalization / Standardization: scale features to same range (essential for KNN, SVM, NN)",
+        "One-Hot Encoding: convert categories to binary columns (dog→[1,0,0], cat→[0,1,0])",
+        "Label Encoding: assign integer to each category (red=0, blue=1, green=2)",
+        "Binning: convert continuous to discrete (age 25→'young adult')",
+        "Log transform: reduce skewness in heavily skewed distributions",
+        "Polynomial features: create x², x₁×x₂ to capture non-linear relationships",
+        "Date features: extract year, month, day, weekday, is_weekend from timestamps",
+        "Text features: TF-IDF, word count, sentiment score from text"
+      ]},
+      {label:"Handling Missing Data",type:"cards",items:[
+        {title:"Drop rows/cols",text:"Remove if too many missing values. Risk: lose data."},
+        {title:"Mean/median impute",text:"Fill with average. Good for numerical, normally distributed."},
+        {title:"Mode impute",text:"Fill with most frequent value. Good for categorical."},
+        {title:"Model impute",text:"Predict missing values using other features (KNN, MICE)."}
+      ]}
+    ]
+  },
+  "model-evaluation":{
+    title:"Model Evaluation",
+    badge:"Core Skill",
+    intro:`Building a model is only half the job. You must <b>evaluate its performance</b> honestly using the right metrics. Wrong metrics can hide serious problems or mislead you about how good your model really is.`,
+    sections:[
+      {label:"Classification Metrics",type:"list",items:[
+        "Accuracy: fraction of correct predictions. Misleading with imbalanced classes",
+        "Precision: of all predicted positives, how many are actually positive?",
+        "Recall (Sensitivity): of all actual positives, how many did we catch?",
+        "F1-Score: harmonic mean of precision and recall. Use when both matter",
+        "AUC-ROC: area under the ROC curve. 0.5=random, 1.0=perfect",
+        "Confusion matrix: table showing TP, TN, FP, FN counts"
+      ]},
+      {label:"Regression Metrics",type:"list",items:[
+        "MAE (Mean Absolute Error): average absolute difference from true value",
+        "MSE (Mean Squared Error): penalizes large errors more",
+        "RMSE: square root of MSE, same units as output",
+        "R² (R-squared): proportion of variance explained by the model (1 = perfect)"
+      ]},
+      {label:"Validation Techniques",type:"cards",items:[
+        {title:"Train/Val/Test split",text:"80% train, 10% validation, 10% test. Simple and fast."},
+        {title:"K-Fold Cross-Validation",text:"Split data K times, average scores. More reliable for small datasets."},
+        {title:"Stratified K-Fold",text:"Preserves class proportions in each fold. Use with imbalanced data."}
+      ]}
+    ]
+  },
+  "neural-networks":{
+    title:"Neural Networks (ANN)",
+    badge:"Deep Learning",
+    intro:`Artificial Neural Networks (ANNs) are loosely inspired by the brain. They consist of <b>layers of interconnected nodes (neurons)</b> that transform input data into output predictions through a series of learned linear + non-linear operations.`,
+    sections:[
+      {label:"Architecture",type:"list",items:[
+        "Input layer — receives raw features (one neuron per feature)",
+        "Hidden layers — transform data through learnable weights. More layers = deeper network",
+        "Output layer — produces predictions (1 neuron for regression, N for N-class classification)",
+        "Weights (W) — learnable parameters connecting neurons",
+        "Bias (b) — offset term added to weighted sum",
+        "Activation function — non-linear function applied after each neuron"
+      ]},
+      {label:"Forward Pass",type:"text",content:`For each layer: <b>z = W·x + b</b> (linear transform), then <b>a = activation(z)</b> (non-linear). The output of one layer is the input of the next. Final output is the prediction.`},
+      {label:"Why depth matters",type:"text",content:`Each layer learns more abstract representations. Layer 1 might detect edges in an image, Layer 2 shapes, Layer 3 object parts, Layer 4 complete objects. This hierarchical feature learning is what makes deep networks so powerful.`},
+      {label:"Real Applications",type:"tags",items:["Image classification","Speech recognition","Language translation","Game playing","Drug discovery","Recommendation systems"]}
+    ]
+  },
+  "backpropagation":{
+    title:"Backpropagation",
+    badge:"Deep Learning",
+    intro:`Backpropagation is the algorithm that <b>trains neural networks</b> by computing gradients of the loss with respect to every weight in the network, then using gradient descent to update those weights.`,
+    sections:[
+      {label:"Two phases",type:"cards",items:[
+        {title:"Forward pass",text:"Input flows forward through all layers. Final output is compared to true label via loss function."},
+        {title:"Backward pass",text:"Gradients flow backward using the chain rule. Each weight gets a gradient telling it which direction to change."}
+      ]},
+      {label:"The Chain Rule",type:"text",content:`If loss L depends on output o, which depends on weight w via a chain of functions, then dL/dw = (dL/do) × (do/dw). We apply this repeatedly from output to input — chaining gradients layer by layer.`},
+      {label:"Gradient Descent Update",type:"text",content:`After computing gradients, each weight is updated: <b>w = w − lr × (dL/dw)</b>. The learning rate lr controls step size. Too large: oscillates and diverges. Too small: slow convergence.`},
+      {label:"Common Issues",type:"list",items:[
+        "Vanishing gradients: gradients get tiny in early layers (ReLU and skip connections help)",
+        "Exploding gradients: gradients grow huge (gradient clipping helps)",
+        "Dead ReLU: neurons stuck at 0, never update (use Leaky ReLU or ELU)",
+        "Saddle points: flat regions that slow training"
+      ]}
+    ]
+  },
+  "cnn":{
+    title:"Convolutional Neural Networks (CNN)",
+    badge:"Deep Learning",
+    intro:`CNNs are specialized neural networks for <b>grid-like data</b> (images, video, 1D signals). Instead of fully-connected layers, they use convolution operations to detect local patterns like edges, textures, and shapes.`,
+    sections:[
+      {label:"Key Components",type:"list",items:[
+        "Convolutional layer — slides a small filter (3×3 or 5×5) across the input, detecting patterns",
+        "Feature map — output of a convolution. Each filter creates one feature map",
+        "Pooling layer — downsamples feature maps (Max pooling keeps the strongest activation)",
+        "ReLU activation — applied after convolution to add non-linearity",
+        "Flatten — convert 2D feature maps to 1D vector before fully-connected layers",
+        "Fully-connected layers — final classification using extracted features"
+      ]},
+      {label:"Why CNNs work for images",type:"text",content:`CNNs exploit two key properties of images: <b>local patterns</b> (an eye looks the same regardless of where it appears) and <b>translation invariance</b> (pooling makes features robust to small shifts). This lets them learn from millions of pixels efficiently.`},
+      {label:"Famous CNN Architectures",type:"cards",items:[
+        {title:"LeNet (1998)",text:"First successful CNN. Handwritten digit recognition."},
+        {title:"AlexNet (2012)",text:"Won ImageNet. Kicked off the deep learning revolution."},
+        {title:"VGG / ResNet",text:"Deeper networks. ResNet introduced skip connections to combat vanishing gradients."},
+        {title:"YOLO",text:"Real-time object detection. Predicts boxes and classes in one pass."}
+      ]}
+    ]
+  },
+  "rnn":{
+    title:"RNN & LSTM",
+    badge:"Deep Learning",
+    intro:`Recurrent Neural Networks (RNNs) are designed for <b>sequential data</b> — text, speech, time series. Unlike feedforward networks, they have loops that allow information to persist from one step to the next.`,
+    sections:[
+      {label:"How RNNs work",type:"text",content:`At each time step, the RNN receives an input x_t and the previous hidden state h_{t-1}, and outputs a new hidden state h_t. The same weights are shared across all time steps. This lets the network maintain a 'memory' of what it has seen.`},
+      {label:"The Vanishing Gradient Problem",type:"text",content:`For long sequences, gradients flowing backward through many time steps become exponentially tiny. The network effectively 'forgets' things from far back in the sequence. LSTM was invented to fix this.`},
+      {label:"LSTM — Long Short-Term Memory",type:"list",items:[
+        "Cell state — a 'conveyor belt' that carries information across many time steps",
+        "Forget gate — decides what to erase from cell state",
+        "Input gate — decides what new information to write to cell state",
+        "Output gate — decides what to output from cell state",
+        "Gated mechanisms allow gradients to flow without vanishing",
+        "GRU (Gated Recurrent Unit) — simpler alternative to LSTM, often similar performance"
+      ]},
+      {label:"Applications",type:"tags",items:["Language modeling","Machine translation","Speech recognition","Sentiment analysis","Time series forecasting","Music generation"]}
+    ]
+  },
+  "activation-functions":{
+    title:"Activation Functions",
+    badge:"Deep Learning",
+    intro:`Activation functions introduce <b>non-linearity</b> into neural networks. Without them, no matter how many layers you stack, the whole network collapses into a single linear function. They're what give deep networks their expressive power.`,
+    sections:[
+      {label:"Common Activation Functions",type:"table",headers:["Function","Formula","Range","Best used for"],rows:[
+        ["Sigmoid","1/(1+e^-x)","(0,1)","Binary output layer"],
+        ["Tanh","(e^x-e^-x)/(e^x+e^-x)","(-1,1)","Hidden layers (RNNs)"],
+        ["ReLU","max(0,x)","[0,∞)","Most hidden layers"],
+        ["Leaky ReLU","max(0.01x,x)","(-∞,∞)","Fixes dead ReLU"],
+        ["Softmax","e^xi/Σe^xj","(0,1), sum=1","Multi-class output"]
+      ]},
+      {label:"ReLU — the default choice",type:"text",content:`ReLU (Rectified Linear Unit) is the most commonly used activation function. It's fast to compute, doesn't saturate for positive inputs, and works well in practice. However, neurons can 'die' (always output 0) if they receive only negative inputs — use Leaky ReLU or ELU to mitigate this.`},
+      {label:"Softmax — for classification",type:"text",content:`Softmax converts a vector of raw scores (logits) into a probability distribution. All outputs sum to 1, so they can be interpreted as class probabilities. Used in the final layer of multi-class classifiers.`}
+    ]
+  },
+  "optimizers":{
+    title:"Optimizers",
+    badge:"Deep Learning",
+    intro:`Optimizers are algorithms that <b>adjust model weights</b> to minimize the loss function. The choice of optimizer affects how fast your model converges and the quality of the final solution.`,
+    sections:[
+      {label:"Stochastic Gradient Descent (SGD)",type:"text",content:`Instead of computing gradients on the whole dataset (slow), SGD computes gradients on a small <b>mini-batch</b> (e.g. 32 examples). Noisy but fast. Can escape local minima due to noise. The foundation of all modern optimizers.`},
+      {label:"Popular Optimizers",type:"table",headers:["Optimizer","Key idea","Best for"],rows:[
+        ["SGD","Fixed learning rate","Simple tasks, with momentum"],
+        ["Momentum","Accumulate velocity, smooth updates","Faster convergence than SGD"],
+        ["RMSprop","Adaptive LR per parameter","RNNs, non-stationary problems"],
+        ["Adam","Momentum + RMSprop combined","Default choice for most tasks"],
+        ["AdamW","Adam + weight decay (L2 reg)","Transformers, large language models"]
+      ]},
+      {label:"Learning Rate",type:"text",content:`The learning rate is the most important hyperparameter. Too high: loss oscillates or diverges. Too low: very slow training. <b>Learning rate schedulers</b> reduce LR over time (step decay, cosine annealing) to fine-tune convergence.`}
+    ]
+  },
+  "pytorch":{
+    title:"PyTorch Framework",
+    badge:"Deep Learning",
+    intro:`PyTorch is the leading deep learning framework in research and increasingly in production. It uses <b>dynamic computation graphs</b> (define-by-run), making it flexible, Pythonic, and easy to debug.`,
+    sections:[
+      {label:"Core Components",type:"list",items:[
+        "Tensor — PyTorch's core data structure (like NumPy array but can run on GPU)",
+        "Autograd — automatic differentiation. Computes gradients automatically",
+        "nn.Module — base class for all neural network layers and models",
+        "nn.Linear, nn.Conv2d, nn.LSTM — pre-built layer types",
+        "DataLoader — batches and shuffles your dataset during training",
+        "Optimizer (torch.optim) — SGD, Adam, etc.",
+        "CUDA — move tensors to GPU with .to('cuda') for massive speedup"
+      ]},
+      {label:"Training Loop",type:"text",content:`1. Forward pass: output = model(x). 2. Compute loss: loss = criterion(output, y). 3. Zero gradients: optimizer.zero_grad(). 4. Backward pass: loss.backward(). 5. Update weights: optimizer.step(). Repeat for each batch.`},
+      {label:"PyTorch vs TensorFlow",type:"cards",items:[
+        {title:"PyTorch",text:"Dynamic graph. Pythonic and easy to debug. Dominant in research. Growing in production."},
+        {title:"TensorFlow / Keras",text:"Static graph (more efficient). Great production tooling. Better deployment options (TF Lite, TF Serving)."}
+      ]}
+    ]
+  },
+  "transfer-learning":{
+    title:"Transfer Learning",
+    badge:"Deep Learning",
+    intro:`Transfer learning lets you take a model <b>pre-trained on a large dataset</b> (like ImageNet) and fine-tune it for your specific task. Instead of training from scratch, you reuse learned representations, saving time and data.`,
+    sections:[
+      {label:"Why it works",type:"text",content:`Deep networks learn general features in early layers (edges, textures) and task-specific features in later layers. These general features transfer well to new tasks. Fine-tuning the last few layers on your data often gives excellent results with very little data.`},
+      {label:"Strategies",type:"cards",items:[
+        {title:"Feature extraction",text:"Freeze all pre-trained weights. Only train a new head (final layers). Fast, needs little data."},
+        {title:"Fine-tuning",text:"Unfreeze top layers and train them with a very small learning rate. Better accuracy, needs more data."},
+        {title:"Full fine-tuning",text:"Train the entire network. Best results but requires more data and compute."}
+      ]},
+      {label:"Popular Pre-trained Models",type:"tags",items:["ResNet (images)","VGG (images)","EfficientNet (images)","BERT (text)","GPT (text)","CLIP (image+text)","Whisper (audio)"]},
+      {label:"Example",type:"example",label2:"ImageNet → Medical imaging",content:"Take ResNet-50 pre-trained on 1.2M ImageNet images. Remove final layer. Add new layer with 2 outputs (normal/tumor). Freeze first 40 layers. Train on your 5,000 medical images. Result: 92% accuracy despite tiny dataset."}
+    ]
+  },
+  "computer-vision":{
+    title:"Computer Vision",
+    badge:"Specialization",
+    intro:`Computer vision teaches machines to <b>understand and interpret visual information</b> — images and video. It's one of the most successful applications of deep learning, matching or exceeding human performance on many tasks.`,
+    sections:[
+      {label:"Core Tasks",type:"cards",items:[
+        {title:"Image Classification",text:"Assign a single label to an image. 'Is this a cat or dog?' ResNet, EfficientNet."},
+        {title:"Object Detection",text:"Find and label multiple objects with bounding boxes. YOLO, Faster R-CNN."},
+        {title:"Semantic Segmentation",text:"Classify every pixel in the image. Used in autonomous driving. U-Net, DeepLab."},
+        {title:"Instance Segmentation",text:"Like semantic segmentation but distinguishes separate instances. Mask R-CNN."},
+        {title:"Image Generation",text:"Create realistic images. GANs, Diffusion Models (Stable Diffusion, DALL-E)."},
+        {title:"Pose Estimation",text:"Detect human body keypoints (joints). Used in AR, fitness apps."}
+      ]},
+      {label:"Key Libraries & Tools",type:"tags",items:["OpenCV","torchvision","Albumentations","YOLO (Ultralytics)","Detectron2","Segment Anything Model (SAM)","Hugging Face","CLIP"]},
+      {label:"Real Applications",type:"tags",items:["Autonomous vehicles","Medical imaging","Security cameras","Augmented reality","Quality inspection","Retail checkout","Document OCR"]}
+    ]
+  },
+  "nlp":{
+    title:"Natural Language Processing (NLP)",
+    badge:"Specialization",
+    intro:`NLP enables computers to <b>understand, generate, and reason about human language</b>. It's behind chatbots, translation, summarization, and language models like GPT. Arguably the most exciting area in ML right now.`,
+    sections:[
+      {label:"Core NLP Tasks",type:"list",items:[
+        "Text classification — sentiment analysis, spam detection, topic labeling",
+        "Named Entity Recognition (NER) — extract people, places, dates from text",
+        "Machine translation — translate between languages (Google Translate)",
+        "Text summarization — extractive (copy key sentences) or abstractive (generate summary)",
+        "Question answering — read a passage, answer questions about it",
+        "Text generation — generate coherent human-like text (GPT, LLaMA)",
+        "Information extraction — pull structured data from unstructured text"
+      ]},
+      {label:"Key Concepts",type:"list",items:[
+        "Tokenization — split text into tokens (words, subwords, characters)",
+        "Word embeddings — represent words as dense vectors (Word2Vec, GloVe)",
+        "Attention mechanism — let model focus on relevant parts of input",
+        "Transformer — the architecture behind BERT, GPT, T5",
+        "Pre-training + fine-tuning — train on massive text, then adapt to specific task",
+        "Prompt engineering — guide model behavior through carefully crafted inputs"
+      ]},
+      {label:"Key Models",type:"tags",items:["BERT (understanding)","GPT (generation)","T5 (seq2seq)","LLaMA","Mistral","RoBERTa","XLNet","BART"]}
+    ]
+  },
+  "transformers":{
+    title:"Transformers & Attention",
+    badge:"Specialization",
+    intro:`The Transformer architecture (2017) <b>revolutionized AI</b>. It replaced RNNs for sequence tasks with a mechanism called <b>self-attention</b>, which lets the model focus on any part of the input when processing any other part — in parallel, not sequentially.`,
+    sections:[
+      {label:"Self-Attention — the core idea",type:"text",content:`For each word in a sentence, self-attention computes a weighted sum of all other words' representations, where weights reflect relevance. "The bank can guarantee deposits will eventually cover future tuition costs" — 'bank' should attend strongly to 'deposits', not 'river'.`},
+      {label:"Key Components",type:"list",items:[
+        "Query, Key, Value — each token is projected to Q, K, V vectors",
+        "Attention score — dot product of Q and K, softmaxed to get weights",
+        "Multi-head attention — run N attention heads in parallel, concat outputs",
+        "Positional encoding — inject position info (no recurrence means no order sense)",
+        "Feed-forward layer — applied independently to each position",
+        "Layer normalization — stabilize training in deep transformers",
+        "Encoder — processes input (BERT uses encoder only)",
+        "Decoder — generates output (GPT uses decoder only)"
+      ]},
+      {label:"Why transformers dominate",type:"cards",items:[
+        {title:"Parallelization",text:"No sequential dependency. Entire sequence processed in parallel. Massively faster training."},
+        {title:"Long-range dependencies",text:"Attention directly connects any two positions. RNNs struggle with long sequences."},
+        {title:"Scalability",text:"Performance improves reliably with more data and parameters (scaling laws)."}
+      ]}
+    ]
+  },
+  "generative-ai":{
+    title:"Generative AI & GANs",
+    badge:"Specialization",
+    intro:`Generative AI creates <b>new content</b> — images, text, audio, video — that looks like it came from the training distribution. GANs (Generative Adversarial Networks) were the dominant approach before diffusion models took over.`,
+    sections:[
+      {label:"GAN — the core idea",type:"text",content:`Two networks in a game: the <b>Generator</b> creates fake images from random noise. The <b>Discriminator</b> tries to distinguish real from fake. They're trained adversarially — the generator improves by fooling the discriminator, which improves by catching fakes. Together they produce increasingly realistic outputs.`},
+      {label:"GAN Variants",type:"cards",items:[
+        {title:"DCGAN",text:"First stable deep convolutional GAN. Generates realistic images."},
+        {title:"StyleGAN",text:"Controls image style at different scales. Used for face generation."},
+        {title:"Pix2Pix",text:"Conditional GAN. Transform one image type to another (sketch→photo)."},
+        {title:"CycleGAN",text:"Unpaired image translation (horse→zebra) without paired training data."}
+      ]},
+      {label:"Modern Generative Models",type:"list",items:[
+        "Variational Autoencoders (VAE) — encode to latent space, decode to generate",
+        "Diffusion Models — add then remove noise iteratively (Stable Diffusion, DALL-E 3)",
+        "Autoregressive models — generate token by token (GPT, LLaMA)",
+        "Flow-based models — invertible transformations (less common)"
+      ]},
+      {label:"Applications",type:"tags",items:["AI art (Midjourney)","Image editing","Data augmentation","Video synthesis","Music generation","Text-to-3D"]}
+    ]
+  },
+  "diffusion":{
+    title:"Diffusion Models",
+    badge:"Specialization",
+    intro:`Diffusion models are the current state-of-the-art for image generation. They work by learning to <b>reverse a process that gradually adds noise</b> to images. Given pure noise, the model denoises step-by-step until a realistic image emerges.`,
+    sections:[
+      {label:"Two Phases",type:"cards",items:[
+        {title:"Forward (noising)",text:"Gradually add Gaussian noise to an image over T timesteps until it becomes pure noise. This is fixed — no learning needed."},
+        {title:"Reverse (denoising)",text:"Train a neural network (usually U-Net) to predict and remove noise at each timestep. Repeat T times to go from noise to image."}
+      ]},
+      {label:"Key Models",type:"list",items:[
+        "DDPM (2020) — first high-quality diffusion model by Ho et al.",
+        "DDIM — faster sampling (50 steps instead of 1000) via non-Markovian process",
+        "Stable Diffusion — latent diffusion model. Runs in compressed latent space (efficient)",
+        "DALL-E 3 — OpenAI's text-to-image model with excellent prompt following",
+        "Imagen — Google's text-to-image, uses cascaded diffusion"
+      ]},
+      {label:"Why better than GANs",type:"text",content:`Diffusion models have more stable training (no mode collapse like GANs), better diversity, and are easier to guide with conditioning (text prompts). The main downside is slow sampling — iterative denoising takes many steps.`}
+    ]
+  },
+  "reinforcement":{
+    title:"Reinforcement Learning",
+    badge:"Specialization",
+    intro:`RL trains an <b>agent</b> to make decisions by interacting with an environment. Instead of labeled data, it learns from <b>rewards and penalties</b> — maximizing cumulative reward over time through trial and error.`,
+    sections:[
+      {label:"Core Concepts",type:"list",items:[
+        "Agent — the learner/decision maker",
+        "Environment — the world the agent interacts with",
+        "State (s) — current situation of the environment",
+        "Action (a) — what the agent can do",
+        "Reward (r) — feedback signal after an action (positive/negative)",
+        "Policy (π) — the agent's strategy: which action to take in each state",
+        "Value function V(s) — expected cumulative reward from state s",
+        "Q-function Q(s,a) — expected reward from taking action a in state s"
+      ]},
+      {label:"Key Algorithms",type:"table",headers:["Algorithm","Type","Known for"],rows:[
+        ["Q-Learning","Model-free, off-policy","Classic RL, simple environments"],
+        ["DQN","Deep Q-Network","Atari games (DeepMind, 2013)"],
+        ["PPO","Policy gradient","OpenAI's default. Stable, widely used"],
+        ["RLHF","Human feedback","Fine-tuning ChatGPT to be helpful"]
+      ]},
+      {label:"Real Applications",type:"tags",items:["Game AI (AlphaGo)","Robot locomotion","Autonomous driving","Trading strategies","LLM alignment (RLHF)","Recommendation systems"]}
+    ]
+  },
+  "docker":{
+    title:"Docker & Containers",
+    badge:"MLOps",
+    intro:`Docker packages your ML model and all its dependencies into a <b>container</b> — an isolated, reproducible unit that runs the same everywhere. 'It works on my machine' is no longer an excuse.`,
+    sections:[
+      {label:"Key Concepts",type:"list",items:[
+        "Image — a snapshot of your environment (code + dependencies + OS)",
+        "Container — a running instance of an image",
+        "Dockerfile — instructions to build an image (like a recipe)",
+        "docker build — create an image from a Dockerfile",
+        "docker run — start a container from an image",
+        "Docker Hub — public registry for sharing images",
+        "Volumes — mount host directories into containers (persistent storage)",
+        "Port mapping — expose container ports to the host machine"
+      ]},
+      {label:"Why Docker for ML",type:"cards",items:[
+        {title:"Reproducibility",text:"Same Python version, same library versions, same result every time, everywhere."},
+        {title:"Deployment",text:"Build once, run on any server — local, cloud, Kubernetes."},
+        {title:"Isolation",text:"No dependency conflicts between different projects."}
+      ]},
+      {label:"Kubernetes",type:"text",content:`Kubernetes (K8s) orchestrates multiple containers at scale — automatically scaling, load balancing, and recovering failed containers. Essential for serving ML models in production at high traffic.`}
+    ]
+  },
+  "fastapi":{
+    title:"REST APIs with FastAPI",
+    badge:"MLOps",
+    intro:`To use your ML model in an app, you need to expose it via an <b>API</b>. FastAPI is the most popular Python framework for building fast, production-ready ML APIs — with automatic documentation and async support.`,
+    sections:[
+      {label:"Core Concepts",type:"list",items:[
+        "Endpoint — a URL path that the API responds to (e.g. /predict)",
+        "HTTP methods — GET (read), POST (create/submit), PUT (update), DELETE",
+        "Request body — data sent with a POST request (your input features)",
+        "Response — what the API returns (prediction, probability, etc.)",
+        "Pydantic models — define input/output schema with automatic validation",
+        "Swagger UI — auto-generated interactive docs at /docs",
+        "Async — handle multiple requests concurrently (great for ML inference)"
+      ]},
+      {label:"Typical ML API Pattern",type:"text",content:`Load model once at startup (not per request). Define Pydantic schema for input features. In POST /predict endpoint: validate input, run model inference, return prediction as JSON. Deploy with uvicorn server inside a Docker container.`},
+      {label:"Example",type:"example",label2:"Simple predict endpoint",content:'@app.post("/predict")\ndef predict(data: InputFeatures):\n    features = np.array([[data.age, data.income]])\n    prediction = model.predict(features)[0]\n    return {"prediction": prediction}'}
+    ]
+  },
+  "mlflow":{
+    title:"MLflow & Experiment Tracking",
+    badge:"MLOps",
+    intro:`MLflow is an open-source platform for <b>managing the ML lifecycle</b> — tracking experiments, packaging models, and deploying them. It solves the 'which version of my model gave that result?' problem.`,
+    sections:[
+      {label:"Core Components",type:"cards",items:[
+        {title:"MLflow Tracking",text:"Log parameters, metrics, artifacts (plots, models) for every experiment run."},
+        {title:"MLflow Projects",text:"Package code as reproducible projects with defined environments."},
+        {title:"MLflow Models",text:"Standardized model format. Save and load models across frameworks."},
+        {title:"MLflow Registry",text:"Version and lifecycle management for production models."}
+      ]},
+      {label:"What to log",type:"list",items:[
+        "Hyperparameters: learning rate, batch size, number of layers",
+        "Metrics: train loss, val accuracy per epoch",
+        "Artifacts: model weights, confusion matrix plot, feature importance chart",
+        "Tags: experiment name, author, git commit hash",
+        "Dataset version: which data was used (integrate with DVC)"
+      ]},
+      {label:"Why it matters",type:"text",content:`Without tracking, you'll have dozens of model files named 'model_final_v3_REAL_final.pkl' with no record of what hyperparameters or data produced them. MLflow gives you a searchable history of every experiment.`}
+    ]
+  },
+  "cloud-ml":{
+    title:"Cloud ML Platforms",
+    badge:"MLOps",
+    intro:`Cloud platforms provide <b>managed infrastructure</b> for training large models, storing datasets, and serving predictions at scale — without managing your own servers.`,
+    sections:[
+      {label:"Major Platforms",type:"cards",items:[
+        {title:"AWS SageMaker",text:"Full ML platform. Managed notebooks, training jobs, endpoints. Integrates with AWS ecosystem."},
+        {title:"Google Vertex AI",text:"GCP's ML platform. Strong integration with BigQuery, TensorFlow, and TPUs."},
+        {title:"Azure ML",text:"Microsoft's ML service. Great for enterprise, tight VS Code integration."},
+        {title:"Lambda Labs / RunPod",text:"Cheaper GPU cloud. Good for training without the enterprise overhead."}
+      ]},
+      {label:"When to use cloud",type:"list",items:[
+        "Training large models that exceed your GPU memory",
+        "Running many parallel hyperparameter search jobs",
+        "Serving predictions to thousands of users (autoscaling endpoints)",
+        "Storing and versioning large datasets (S3, GCS)",
+        "Scheduled batch inference jobs"
+      ]},
+      {label:"Cost tips",type:"list",items:[
+        "Use spot/preemptible instances for training (70-90% cheaper, can be interrupted)",
+        "Monitor GPU utilization — underutilized GPUs = wasted money",
+        "Quantize models before serving — smaller models = cheaper inference",
+        "Cache predictions for repeated inputs"
+      ]}
+    ]
+  },
+  "model-monitoring":{
+    title:"Model Monitoring",
+    badge:"MLOps",
+    intro:`Deploying a model is not the end. Models <b>degrade over time</b> as the real world changes. Monitoring detects when your model's performance is slipping before users notice.`,
+    sections:[
+      {label:"Types of Drift",type:"cards",items:[
+        {title:"Data drift",text:"Input feature distribution shifts. New users behave differently than training data."},
+        {title:"Concept drift",text:"Relationship between inputs and outputs changes. A spam classifier trained pre-2020 misses new spam tactics."},
+        {title:"Label drift",text:"Distribution of output labels changes (seasonal patterns, market shifts)."}
+      ]},
+      {label:"What to monitor",type:"list",items:[
+        "Prediction distribution — are output probabilities shifting over time?",
+        "Feature statistics — mean, std, min/max of input features",
+        "Model accuracy — compare predictions to ground truth when available",
+        "Latency — is inference getting slower?",
+        "Data quality — missing values, out-of-range inputs, schema violations",
+        "Business metrics — conversion rate, click-through, return rate"
+      ]},
+      {label:"Tools",type:"tags",items:["Evidently AI","WhyLabs","Arize AI","Grafana","Prometheus","AWS Model Monitor","Great Expectations"]}
+    ]
+  },
+  "kaggle":{
+    title:"Kaggle Competitions",
+    badge:"Career",
+    intro:`Kaggle is the world's largest ML competition platform. Competing teaches you <b>practical skills</b> you can't get from courses — real messy data, creative feature engineering, ensemble methods, and learning from top solutions.`,
+    sections:[
+      {label:"How Competitions Work",type:"list",items:[
+        "Company/org posts a real problem with a dataset and prize money",
+        "Competitors build models and submit predictions",
+        "Public leaderboard shows your score during the competition",
+        "Private leaderboard (held-out test set) determines final ranking",
+        "Top solutions are shared after the competition ends — gold mine of learning"
+      ]},
+      {label:"Strategy for Beginners",type:"list",items:[
+        "Start with Titanic / Housing Prices (Playground competitions)",
+        "Read the winning solutions from past similar competitions",
+        "Spend 60% of time on feature engineering, 20% on modeling, 20% on ensembling",
+        "Cross-validate locally before submitting to avoid leaderboard overfitting",
+        "Join teams — you learn faster and can medal with stronger partners",
+        "Read and post in the discussion forum — insights shared daily"
+      ]},
+      {label:"What employers care about",type:"text",content:`Reaching the top 10% gets you a Kaggle medal (Bronze/Silver/Gold/Grandmaster). Even without medals, explaining <b>what you tried, why, and what you learned</b> from a Kaggle competition shows hands-on ML thinking that impresses interviewers.`}
+    ]
+  },
+  "portfolio":{
+    title:"Building Your ML Portfolio",
+    badge:"Career",
+    intro:`Your portfolio is your <b>proof of work</b>. Certificates tell employers you studied; projects tell them you can build. Three strong end-to-end projects beat ten shallow tutorials.`,
+    sections:[
+      {label:"What makes a great project",type:"list",items:[
+        "Solves a real problem (not just MNIST or Titanic)",
+        "Has a full pipeline: data collection → EDA → modeling → evaluation → deployment",
+        "Deployed as a live app (Streamlit, Gradio, HuggingFace Spaces) — linkable!",
+        "Clean, documented code on GitHub with a detailed README",
+        "Includes quantitative results (accuracy, F1, comparison to baselines)",
+        "Shows your thought process — what you tried, why, what failed"
+      ]},
+      {label:"Project ideas by level",type:"cards",items:[
+        {title:"Beginner",text:"Sentiment analysis on tweets. House price predictor. Movie recommender. Email spam classifier."},
+        {title:"Intermediate",text:"Custom image classifier. News summarizer. Time series forecasting. Resume parser."},
+        {title:"Advanced",text:"Fine-tuned LLM for a domain. Real-time object detection app. End-to-end MLOps pipeline with monitoring."}
+      ]},
+      {label:"Essential tools",type:"tags",items:["GitHub","Streamlit","Gradio","HuggingFace Spaces","Weights & Biases","Docker","GitHub Actions"]}
+    ]
+  },
+  "papers":{
+    title:"Reading Research Papers",
+    badge:"Career",
+    intro:`ML moves fast. Reading papers lets you <b>stay at the frontier</b> and understand techniques before they become mainstream. You don't need a PhD — most landmark papers are readable with the right approach.`,
+    sections:[
+      {label:"How to read a paper",type:"list",items:[
+        "Pass 1 (5 min): Read title, abstract, intro, and conclusion. Decide if worth reading fully",
+        "Pass 2 (1 hour): Read everything except proofs. Understand the main method and results",
+        "Pass 3 (4 hours): Deep read with pen and paper. Derive every equation. Understand every claim",
+        "Implement it: code the key idea from scratch. You truly understand it only when you can build it"
+      ]},
+      {label:"Where to find papers",type:"tags",items:["arXiv.org","Papers With Code","Semantic Scholar","Google Scholar","Hugging Face Papers","NeurIPS/ICML/ICLR"]},
+      {label:"Must-read ML papers",type:"list",items:[
+        "'Attention Is All You Need' (2017) — invented the Transformer",
+        "'Deep Residual Learning' (2015) — ResNet skip connections",
+        "'Generative Adversarial Networks' (2014) — Ian Goodfellow's GAN",
+        "'BERT' (2018) — bidirectional pre-training for NLP",
+        "'Playing Atari with Deep Reinforcement Learning' (2013) — DQN",
+        "'Denoising Diffusion Probabilistic Models' (2020) — DDPM"
+      ]}
+    ]
+  },
+  "interview":{
+    title:"ML Interview Prep",
+    badge:"Career",
+    intro:`ML interviews typically have <b>4 components</b>: coding (LeetCode), ML theory, ML system design, and behavioral. Each requires different preparation. Start early — a solid foundation takes 2–3 months.`,
+    sections:[
+      {label:"Interview Types",type:"cards",items:[
+        {title:"Coding",text:"LeetCode medium/hard. Arrays, trees, DP, sorting. Practice on Python. Aim for 100+ problems."},
+        {title:"ML Theory",text:"Bias-variance tradeoff, regularization, common algorithms, backprop, evaluation metrics."},
+        {title:"ML System Design",text:"Design a recommendation system, fraud detector, or search ranking system at scale."},
+        {title:"Behavioral",text:"STAR format. Prepare stories about projects, failures, collaboration, and impact."}
+      ]},
+      {label:"Most Common ML Theory Questions",type:"list",items:[
+        "Explain bias-variance tradeoff and how to address each",
+        "How does backpropagation work?",
+        "Explain regularization (L1 vs L2) and why we need it",
+        "How would you handle class imbalance?",
+        "Explain precision vs recall and when to prioritize each",
+        "What happens if you have correlated features?",
+        "How does gradient descent work? What learning rate issues can arise?",
+        "Explain the attention mechanism"
+      ]},
+      {label:"Resources",type:"tags",items:["Chip Huyen's ML Interviews","LeetCode","CS 229 notes (Stanford)","Grokking the ML Interview","System Design Interview (Alex Xu)","Glassdoor company reviews"]}
+    ]
+  }
+};
+
+function renderSection(s){
+  if(s.type==="text") return `<div class="section"><div class="section-label">${s.label}</div><p class="section-text">${s.content}</p></div>`;
+  if(s.type==="list") return `<div class="section"><div class="section-label">${s.label}</div><ul class="key-points">${s.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;
+  if(s.type==="tags") return `<div class="section"><div class="section-label">${s.label}</div><div class="use-tags">${s.items.map(t=>`<span class="use-tag" style="color:var(--cyan);border-color:rgba(0,212,232,0.3);background:rgba(0,212,232,0.06)">${t}</span>`).join('')}</div></div>`;
+  if(s.type==="cards") return `<div class="section"><div class="section-label">${s.label}</div><div class="type-cards">${s.items.map(c=>`<div class="type-card"><div class="type-card-title" style="color:var(--cyan)">${c.title}</div><div class="type-card-text">${c.text}</div></div>`).join('')}</div></div>`;
+  if(s.type==="example") return `<div class="section"><div class="section-label">${s.label}</div><div class="example-box"><div class="ex-label">${s.label2||'Example'}</div><p>${s.content.replace(/\n/g,'<br>')}</p></div></div>`;
+  if(s.type==="table") return `<div class="section"><div class="section-label">${s.label}</div><table class="algo-table"><thead><tr>${s.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${s.rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+  return '';
+}
+
+function showTopic(id, phaseColor, phaseName){
+  const d = content[id];
+  if(!d) return;
+  const detail = document.getElementById('topic-detail');
+  const welcome = document.getElementById('welcome');
+  welcome.style.display='none';
+  detail.className='topic-detail visible';
+  detail.innerHTML=`
+    <div class="detail-header">
+      <div class="detail-breadcrumb">ML ROADMAP › ${phaseName.toUpperCase()}</div>
+      <div class="detail-title" style="color:${phaseColor}">${d.title}</div>
+      <span class="detail-badge" style="color:${phaseColor};border-color:${phaseColor}40;background:${phaseColor}12">${d.badge}</span>
+    </div>
+    <div class="detail-body">
+      <div class="section">
+        <div class="section-label">Overview</div>
+        <p class="section-text">${d.intro}</p>
+      </div>
+      ${d.sections.map(renderSection).join('')}
+    </div>
+    <div class="nav-hint">▸ Select another topic from the sidebar to continue ◂</div>
+  `;
+  detail.scrollTop=0;
+  document.querySelectorAll('.topic-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll(`.topic-btn[data-id="${id}"]`).forEach(b=>b.classList.add('active'));
+}
+
+function buildSidebar(){
+  const list=document.getElementById('phase-list');
+  phases.forEach((p,pi)=>{
+    const group=document.createElement('div');
+    group.className='phase-group';
+    const header=document.createElement('div');
+    header.className='phase-header'+(pi===0?' active':'');
+    header.innerHTML=`
+      <div class="phase-dot-s" style="background:${p.color};box-shadow:0 0 6px ${p.color}80"></div>
+      <div class="phase-title-s" style="color:${p.color}">Phase ${pi+1}: ${p.name}</div>
+      <span class="phase-arrow${pi===0?' open':''}">▶</span>
+    `;
+    const topicList=document.createElement('div');
+    topicList.className='topic-list'+(pi===0?' open':'');
+    p.topics.forEach(t=>{
+      const btn=document.createElement('button');
+      btn.className='topic-btn';
+      btn.dataset.id=t.id;
+      btn.textContent=t.name;
+      btn.onclick=()=>showTopic(t.id,p.color,p.name);
+      topicList.appendChild(btn);
+    });
+    header.onclick=()=>{
+      const isOpen=topicList.classList.contains('open');
+      document.querySelectorAll('.topic-list').forEach(tl=>tl.classList.remove('open'));
+      document.querySelectorAll('.phase-arrow').forEach(a=>a.classList.remove('open'));
+      document.querySelectorAll('.phase-header').forEach(h=>h.classList.remove('active'));
+      if(!isOpen){
+        topicList.classList.add('open');
+        header.querySelector('.phase-arrow').classList.add('open');
+        header.classList.add('active');
+      }
+    };
+    group.appendChild(header);
+    group.appendChild(topicList);
+    list.appendChild(group);
+  });
+}
+
+buildSidebar();
+</script>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ TRANSPORT PROJECT MODAL ═══════════════════════ -->
+  <div class="modal-overlay" id="modal-tr">
+    <button class="modal-close" onclick="closeModal('tr')">✕</button>
+    <div class="modal-frame">
+
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <div class="nav-logo-icon">🚛</div>
+    <div class="nav-logo-text"><span>BADSHAH</span> TRANSPORT</div>
+  </div>
+  <div class="nav-links">
+    <a href="#fleet">Fleet</a>
+    <a href="#calculator">Price</a>
+    <a href="#tracking">Track</a>
+    <a href="#coverage">Coverage</a>
+    <a href="#dashboard">My Orders</a>
+    <a href="#contact">Contact</a>
+    <button class="lang-btn" onclick="toggleLang()">اردو</button>
+  </div>
+  <a href="#hero" class="nav-cta" onclick="openBooking()">Book Now</a>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker-wrap" style="margin-top:70px;">
+  <div class="ticker">
+    <span class="ticker-item">🚛 Lahore to Karachi — Same Day Dispatch</span>
+    <span class="ticker-item">📦 GPS Tracked Deliveries Nationwide</span>
+    <span class="ticker-item">✅ 50,000+ Deliveries Completed</span>
+    <span class="ticker-item">💳 JazzCash & Easypaisa Accepted</span>
+    <span class="ticker-item">📞 24/7 Customer Support: 03229086360</span>
+    <span class="ticker-item">🚛 Lahore to Karachi — Same Day Dispatch</span>
+    <span class="ticker-item">📦 GPS Tracked Deliveries Nationwide</span>
+    <span class="ticker-item">✅ 50,000+ Deliveries Completed</span>
+    <span class="ticker-item">💳 JazzCash & Easypaisa Accepted</span>
+    <span class="ticker-item">📞 24/7 Customer Support: 03005430123</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-sky"></div>
+  <div class="road-lines">
+    <div class="road-line"></div>
+    <div class="road-line"></div>
+    <div class="road-line"></div>
+    <div class="road-line"></div>
+    <div class="road-line"></div>
+  </div>
+  <div class="hero-truck">🚛</div>
+  <div class="dust"></div>
+  <div class="gps-pin">
+    <div class="gps-pin-dot"></div>
+    <div class="gps-pin-label">📍 Live Tracking</div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-badge">🇵🇰 Pakistan's #1 Goods Transport</div>
+      <h1 class="hero-title">
+        BADSHAH<br>
+        <span>GOODS</span>
+        TRANSPORT
+      </h1>
+      <p class="hero-sub"><strong>Fast, Safe & Reliable</strong><br>Goods Transport Across Pakistan</p>
+      <div class="hero-btns">
+        <a href="#" class="btn-primary" onclick="openBooking(); return false;">🚛 Book Truck</a>
+        <a href="#calculator" class="btn-outline">💰 Calculate Price</a>
+        <a href="#tracking" class="btn-outline">📍 Track Shipment</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">50K+</div><div class="stat-label">Deliveries</div></div>
+        <div class="stat"><div class="stat-num">200+</div><div class="stat-label">Trucks</div></div>
+        <div class="stat"><div class="stat-num">35+</div><div class="stat-label">Cities</div></div>
+        <div class="stat"><div class="stat-num">9+</div><div class="stat-label">Years</div></div>
+      </div>
+    </div>
+
+    <!-- Quick Booking Card -->
+    <div class="booking-card">
+      <h3>🚛 Quick Book</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>From City</label>
+          <select id="h-from" onchange="calcHeroPrice()">
+            <option value="">Select City</option>
+            <option>Lahore</option><option>Karachi</option><option>Islamabad</option>
+            <option>Rawalpindi</option><option>Faisalabad</option><option>Multan</option>
+            <option>Peshawar</option><option>Quetta</option><option>Gujranwala</option>
+            <option>Sialkot</option><option>Hyderabad</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>To City</label>
+          <select id="h-to" onchange="calcHeroPrice()">
+            <option value="">Select City</option>
+            <option>Lahore</option><option>Karachi</option><option>Islamabad</option>
+            <option>Rawalpindi</option><option>Faisalabad</option><option>Multan</option>
+            <option>Peshawar</option><option>Quetta</option><option>Gujranwala</option>
+            <option>Sialkot</option><option>Hyderabad</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Truck Type</label>
+        <select id="h-truck" onchange="calcHeroPrice()">
+          <option value="">Select Truck</option>
+          <option value="mazda">Mazda (10 Ton)</option>
+          <option value="6w">6 Wheeler (15 Ton)</option>
+          <option value="10w">10 Wheeler (30 Ton)</option>
+          <option value="22w">22 Wheeler (52 Ton)</option>
+          <option value="trailer">Trailer (60 Ton)</option>
+          <option value="container">Container (40 Ton)</option>
+          <option value="tanker">Oil Tanker</option>
+          <option value="loader">Loader Rickshaw (500 kg)</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Weight (KG)</label>
+          <input type="number" id="h-weight" placeholder="e.g. 5000" onchange="calcHeroPrice()">
+        </div>
+        <div class="form-group">
+          <label>Goods Type</label>
+          <select id="h-goods">
+            <option>General Cargo</option>
+            <option>Fragile Items</option>
+            <option>Food & Beverages</option>
+            <option>Machinery</option>
+            <option>Electronics</option>
+            <option>Chemicals</option>
+            <option>Construction</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Delivery Date</label>
+        <input type="date" id="h-date">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Delivery Type</label>
+          <select id="h-urgency" onchange="calcHeroPrice()">
+            <option value="normal">Normal Delivery</option>
+            <option value="urgent">Urgent (+30%)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Quantity</label>
+          <input type="number" id="h-qty" placeholder="No. of items" value="1">
+        </div>
+      </div>
+      <div class="price-preview">
+        <div>
+          <div class="price-preview-label">Est. Price</div>
+          <div class="price-preview-val" id="hero-price">Rs. —</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:11px;color:var(--gray);">Incl. toll & fuel</div>
+          <div style="font-size:11px;color:#4ade80;">✓ GPS Tracked</div>
+        </div>
+      </div>
+      <button class="book-btn" onclick="openBooking()">CONFIRM BOOKING →</button>
+    </div>
+  </div>
+</section>
+
+<!-- COUNTER STRIP -->
+<div class="counter-strip">
+  <div class="inner">
+    <div class="counter-item"><div class="counter-num" data-target="50000">0</div><div class="counter-label">Deliveries Completed</div></div>
+    <div class="counter-item"><div class="counter-num" data-target="200">0</div><div class="counter-label">Trucks in Fleet</div></div>
+    <div class="counter-item"><div class="counter-num" data-target="35">0</div><div class="counter-label">Cities Covered</div></div>
+    <div class="counter-item"><div class="counter-num" data-target="98">0</div><div class="counter-label">% On-Time Delivery</div></div>
+  </div>
+</div>
+
+<!-- FLEET SECTION -->
+<section id="fleet">
+  <div class="inner">
+    <div class="fade-up">
+      <div class="section-label">Our Fleet</div>
+      <h2 class="section-title">CHOOSE YOUR TRUCK</h2>
+      <p class="section-sub">From small loads to massive cargo — we have the right truck for every need across Pakistan.</p>
+    </div>
+    <div class="fleet-grid fade-up">
+      <div class="truck-card" onclick="selectTruck('mazda')">
+        <div class="truck-badge">Popular</div>
+        <span class="truck-icon">🚐</span>
+        <div class="truck-name">Mazda</div>
+        <div class="truck-capacity">Capacity: 2 Ton</div>
+        <div class="truck-details">Perfect for small city deliveries & home shifting</div>
+      </div>
+      <div class="truck-card" onclick="selectTruck('6w')">
+        <span class="truck-icon">🚚</span>
+        <div class="truck-name">6 Wheeler</div>
+        <div class="truck-capacity">Capacity: 5 Ton</div>
+        <div class="truck-details">Medium cargo — electronics, furniture, goods</div>
+      </div>
+      <div class="truck-card" onclick="selectTruck('10w')">
+        <div class="truck-badge">Best Value</div>
+        <span class="truck-icon">🚛</span>
+        <div class="truck-name">10 Wheeler</div>
+        <div class="truck-capacity">Capacity: 10 Ton</div>
+        <div class="truck-details">Heavy loads — machinery, construction materials</div>
+      </div>
+      <div class="truck-card" onclick="selectTruck('22w')">
+        <span class="truck-icon">🚛</span>
+        <div class="truck-name">22 Wheeler</div>
+        <div class="truck-capacity">Capacity: 22 Ton</div>
+        <div class="truck-details">Industrial transport — steel, cement, chemicals</div>
+      </div>
+      <div class="truck-card" onclick="selectTruck('trailer')">
+        <span class="truck-icon">🚜</span>
+        <div class="truck-name">Trailer</div>
+        <div class="truck-capacity">Capacity: 40 Ton</div>
+        <div class="truck-details">Maximum load — heavy machinery & bulk cargo</div>
+      </div>
+      <div class="truck-card" onclick="selectTruck('container')">
+        <span class="truck-icon">📦</span>
+        <div class="truck-name">Container</div>
+        <div class="truck-capacity">Capacity: 30 Ton</div>
+        <div class="truck-details">Export/import — port to warehouse deliveries</div>
+      </div>
+      <div class="truck-card" onclick="selectTruck('tanker')">
+        <span class="truck-icon">🛢️</span>
+        <div class="truck-name">Oil Tanker</div>
+        <div class="truck-capacity">Liquid Cargo</div>
+        <div class="truck-details">Fuel, chemicals, liquids — certified tankers</div>
+      </div>
+      <div class="truck-card" onclick="selectTruck('loader')">
+        <span class="truck-icon">🛺</span>
+        <div class="truck-name">Loader Rickshaw</div>
+        <div class="truck-capacity">Capacity: 500 KG</div>
+        <div class="truck-details">Local city deliveries — narrow streets & markets</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COVERAGE -->
+<section id="coverage" style="padding:100px 0;">
+  <div class="inner">
+    <div class="fade-up">
+      <div class="section-label">Service Area</div>
+      <h2 class="section-title">WE COVER ALL OF PAKISTAN</h2>
+      <p class="section-sub">From Khyber to Karachi — our network spans every major city and route in Pakistan.</p>
+    </div>
+    <div class="cities-grid fade-up" style="margin-top:50px;">
+      <div class="city-card"><div class="city-flag">🏙️</div><div class="city-name">Lahore</div><div class="city-status">✓ Active Hub</div></div>
+      <div class="city-card"><div class="city-flag">🌊</div><div class="city-name">Karachi</div><div class="city-status">✓ Active Hub</div></div>
+      <div class="city-card"><div class="city-flag">🏛️</div><div class="city-name">Islamabad</div><div class="city-status">✓ Active Hub</div></div>
+      <div class="city-card"><div class="city-flag">⚔️</div><div class="city-name">Rawalpindi</div><div class="city-status">✓ Active Hub</div></div>
+      <div class="city-card"><div class="city-flag">🏭</div><div class="city-name">Faisalabad</div><div class="city-status">✓ Active Hub</div></div>
+      <div class="city-card"><div class="city-flag">🌾</div><div class="city-name">Multan</div><div class="city-status">✓ Active Hub</div></div>
+      <div class="city-card"><div class="city-flag">🏔️</div><div class="city-name">Peshawar</div><div class="city-status">✓ Active Hub</div></div>
+      <div class="city-card"><div class="city-flag">🌵</div><div class="city-name">Quetta</div><div class="city-status">✓ Active Hub</div></div>
+      <div class="city-card"><div class="city-flag">⚽</div><div class="city-name">Gujranwala</div><div class="city-status">✓ Active</div></div>
+      <div class="city-card"><div class="city-flag">⚙️</div><div class="city-name">Sialkot</div><div class="city-status">✓ Active</div></div>
+      <div class="city-card"><div class="city-flag">🌊</div><div class="city-name">Hyderabad</div><div class="city-status">✓ Active</div></div>
+      <div class="city-card"><div class="city-flag">🏗️</div><div class="city-name">Gujrat</div><div class="city-status">✓ Active</div></div>
+      <div class="city-card"><div class="city-flag">🌿</div><div class="city-name">Bahawalpur</div><div class="city-status">✓ Active</div></div>
+      <div class="city-card"><div class="city-flag">📍</div><div class="city-name">Sargodha</div><div class="city-status">✓ Active</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICE CALCULATOR -->
+<section id="calculator">
+  <div class="inner">
+    <div class="fade-up">
+      <div class="section-label">Smart Calculator</div>
+      <h2 class="section-title">GET INSTANT PRICE</h2>
+      <p class="section-sub">Enter your route details and get an accurate freight quote in seconds — no hidden charges.</p>
+    </div>
+    <div class="calc-grid">
+      <div class="calc-form fade-up">
+        <div class="form-row" style="margin-bottom:16px;">
+          <div class="form-group">
+            <label>From City</label>
+            <select id="c-from" onchange="calculatePrice()">
+              <option value="">Select City</option>
+              <option value="lahore">Lahore</option><option value="karachi">Karachi</option>
+              <option value="islamabad">Islamabad</option><option value="faisalabad">Faisalabad</option>
+              <option value="multan">Multan</option><option value="peshawar">Peshawar</option>
+              <option value="quetta">Quetta</option><option value="rawalpindi">Rawalpindi</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>To City</label>
+            <select id="c-to" onchange="calculatePrice()">
+              <option value="">Select City</option>
+              <option value="lahore">Lahore</option><option value="karachi">Karachi</option>
+              <option value="islamabad">Islamabad</option><option value="faisalabad">Faisalabad</option>
+              <option value="multan">Multan</option><option value="peshawar">Peshawar</option>
+              <option value="quetta">Quetta</option><option value="rawalpindi">Rawalpindi</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom:16px;">
+          <label>Truck Type</label>
+          <select id="c-truck" onchange="calculatePrice()">
+            <option value="mazda">Mazda — 2 Ton capacity</option>
+            <option value="6w">6 Wheeler — 5 Ton capacity</option>
+            <option value="10w">10 Wheeler — 10 Ton capacity</option>
+            <option value="22w">22 Wheeler — 22 Ton capacity</option>
+            <option value="trailer">Trailer — 40 Ton capacity</option>
+            <option value="container">Container — 30 Ton capacity</option>
+            <option value="loader">Loader Rickshaw — 500 kg</option>
+          </select>
+        </div>
+        <div class="form-row" style="margin-bottom:16px;">
+          <div class="form-group">
+            <label>Weight (KG)</label>
+            <input type="number" id="c-kg" placeholder="Enter KG" oninput="syncTon()" onchange="calculatePrice()">
+          </div>
+          <div class="form-group">
+            <label>Weight (TON)</label>
+            <input type="number" id="c-ton" placeholder="Enter Ton" step="0.1" oninput="syncKg()" onchange="calculatePrice()">
+          </div>
+        </div>
+        <div class="form-row" style="margin-bottom:16px;">
+          <div class="form-group">
+            <label>Delivery Type</label>
+            <select id="c-urgency" onchange="calculatePrice()">
+              <option value="normal">Normal Delivery</option>
+              <option value="urgent">Urgent (+30%)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Special Handling</label>
+            <select id="c-special" onchange="calculatePrice()">
+              <option value="none">None</option>
+              <option value="fragile">Fragile (+Rs.2000)</option>
+              <option value="hazmat">Hazmat (+Rs.5000)</option>
+              <option value="refrigerated">Refrigerated (+Rs.4000)</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn-primary calc-btn" onclick="calculatePrice()">CALCULATE PRICE →</button>
+      </div>
+      <div class="calc-result fade-up" id="calc-result-box">
+        <h3>💰 Price Breakdown</h3>
+        <ul class="price-breakdown">
+          <li><span class="label">Base Freight</span><span class="value" id="r-base">Rs. —</span></li>
+          <li><span class="label">Fuel Charges</span><span class="value" id="r-fuel">Rs. —</span></li>
+          <li><span class="label">Toll Tax</span><span class="value" id="r-toll">Rs. —</span></li>
+          <li><span class="label">Labour Charges</span><span class="value" id="r-labour">Rs. 1,500</span></li>
+          <li><span class="label">Special Handling</span><span class="value" id="r-special">Rs. —</span></li>
+          <li><span class="label">Urgent Surcharge</span><span class="value" id="r-urgent">Rs. —</span></li>
+        </ul>
+        <div class="price-total">
+          <div class="price-total-label">Total Estimated Cost</div>
+          <div class="price-total-num" id="r-total">Rs. —</div>
+          <div class="price-total-sub">*GST may apply. Final price confirmed at pickup.</div>
+        </div>
+        <button class="btn-primary" style="width:100%;margin-top:16px;" onclick="openBooking()">BOOK THIS TRUCK →</button>
+        <a href="https://wa.me/923229086360" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;color:#4ade80;font-size:14px;font-weight:600;text-decoration:none;">
+          💬 Confirm Price on WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRACKING -->
+<section id="tracking">
+  <div class="inner">
+    <div class="fade-up">
+      <div class="section-label">Live Tracking</div>
+      <h2 class="section-title">TRACK YOUR SHIPMENT</h2>
+      <p class="section-sub">Real-time GPS tracking. Know exactly where your goods are at every moment.</p>
+    </div>
+    <div class="track-container">
+      <div class="track-form fade-up">
+        <h3 style="font-family:'Barlow Condensed';font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--orange);margin-bottom:20px;">Enter Booking ID</h3>
+        <div class="track-input">
+          <input type="text" id="track-id" placeholder="e.g. BGT-2024-8821" value="">
+          <button class="btn-primary" onclick="trackOrder()" style="padding:14px 20px;white-space:nowrap;">TRACK →</button>
+        </div>
+        <div class="track-result" id="track-result">
+          <div class="track-status-bar">
+            <div class="track-step done"><div class="track-step-dot">✓</div><div class="track-step-label">Booked</div></div>
+            <div class="track-step done"><div class="track-step-dot">✓</div><div class="track-step-label">Picked Up</div></div>
+            <div class="track-step active"><div class="track-step-dot">🚛</div><div class="track-step-label">In Transit</div></div>
+            <div class="track-step"><div class="track-step-dot">📦</div><div class="track-step-label">Delivered</div></div>
+          </div>
+          <div style="background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.2);border-radius:10px;padding:16px;margin:16px 0;">
+            <div style="font-size:12px;color:var(--gray);margin-bottom:4px;">Current Location</div>
+            <div style="font-weight:700;font-size:16px;">📍 Mardan main city — M4 Motorway</div>
+            <div style="font-size:13px;color:var(--orange2);margin-top:4px;">ETA: Tomorrow, 10:00 AM to Karachi</div>
+          </div>
+          <div class="driver-card">
+            <div class="driver-avatar">👨‍✈️</div>
+            <div class="driver-info">
+              <div class="driver-name">Shahab shah</div>
+              <div class="driver-sub">🚛 10 Wheeler — LHR-2847</div>
+              <div class="driver-sub" style="margin-top:2px;">⭐ 4.8 Rating — Verified Driver</div>
+            </div>
+            <div class="driver-contact">
+              <a href="tel:+923101560917">📞 Call Driver</a><br>
+              <a href="https://wa.me/+923101560917" style="color:#4ade80;margin-top:4px;display:block;">💬 WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="map-placeholder fade-up">
+        <div class="map-inner">
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;z-index:1;">
+            <div style="font-size:60px;margin-bottom:12px;">🗺️</div>
+            <div style="font-family:'Barlow Condensed';font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--orange);">Live Route Map</div>
+            <div style="font-size:14px;color:var(--gray);margin-top:6px;">Enter Booking ID to see live position</div>
+          </div>
+          <div class="map-truck-moving">🚛</div>
+          <!-- Decorative route lines -->
+          <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.3;" viewBox="0 0 400 300">
+            <path d="M 40 240 Q 150 180 200 120 Q 260 60 360 40" stroke="#f97316" stroke-width="2" fill="none" stroke-dasharray="8 4">
+              <animate attributeName="stroke-dashoffset" from="0" to="-48" dur="2s" repeatCount="indefinite"/>
+            </path>
+            <circle cx="40" cy="240" r="6" fill="#f97316"/>
+            <circle cx="360" cy="40" r="6" fill="#4ade80"/>
+            <text x="50" y="250" fill="white" font-size="11" font-family="Barlow">Lahore</text>
+            <text x="340" y="55" fill="white" font-size="11" font-family="Barlow">Karachi</text>
+          </svg>
+          <div class="map-overlay-text">
+            <div><div style="font-size:11px;color:var(--gray);">Distance</div><div style="font-weight:700;">1,212 km</div></div>
+            <div><div style="font-size:11px;color:var(--gray);">Speed</div><div style="font-weight:700;">82 km/h</div></div>
+            <div><div style="font-size:11px;color:var(--gray);">ETA</div><div style="font-weight:700;color:var(--orange2);">14h 45m</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST FEATURES -->
+<section id="trust">
+  <div class="inner">
+    <div class="fade-up">
+      <div class="section-label">Why Choose Us</div>
+      <h2 class="section-title">PAKISTAN'S MOST TRUSTED</h2>
+      <p class="section-sub">We don't just move goods — we move them with care, speed, and complete transparency.</p>
+    </div>
+    <div class="trust-grid fade-up">
+      <div class="trust-card"><span class="trust-icon">📡</span><div class="trust-title">GPS Live Tracking</div><div class="trust-desc">Real-time location of your shipment available 24/7 through our app and website. Never wonder where your goods are.</div></div>
+      <div class="trust-card"><span class="trust-icon">✅</span><div class="trust-title">Verified Drivers</div><div class="trust-desc">All our drivers are background-verified, licensed, and trained. Your goods are always in safe, professional hands.</div></div>
+      <div class="trust-card"><span class="trust-icon">🛡️</span><div class="trust-title">Goods Insurance</div><div class="trust-desc">Optional cargo insurance available for all shipments. Ship with complete peace of mind — your goods are covered.</div></div>
+      <div class="trust-card"><span class="trust-icon">📞</span><div class="trust-title">24/7 Support</div><div class="trust-desc">Our customer support team is available round the clock via phone, WhatsApp, and live chat for any queries.</div></div>
+      <div class="trust-card"><span class="trust-icon">⚡</span><div class="trust-title">Fast Nationwide Delivery</div><div class="trust-desc">Express and same-day dispatch options. We guarantee on-time delivery across all major Pakistan routes.</div></div>
+      <div class="trust-card"><span class="trust-icon">📦</span><div class="trust-title">Safe Goods Handling</div><div class="trust-desc">Trained loaders, proper packing materials, and careful handling protocols for fragile, heavy, or sensitive cargo.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="inner">
+    <div class="fade-up">
+      <div class="section-label">Customer Reviews</div>
+      <h2 class="section-title">TRUSTED BY BUSINESSES</h2>
+    </div>
+    <div class="reviews-grid fade-up">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Badshah Transport ne hamare factory ka saaman Lahore se Karachi bilkul safe aur waqt par pohanchaya. Driver bohat professional tha. GPS tracking se hum sab kuch real-time dekh sakay."</p>
+        <div class="review-author"><div class="review-avatar">👨‍💼</div><div><div class="review-name">Ahmed Raza</div><div class="review-co">AL-Raza Textile Mills, Faisalabad</div></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Best transport company in Pakistan! Their 22 wheeler delivered 20 tons of steel from Karachi to Islamabad without a single damage. Price was fair and transparent."</p>
+        <div class="review-author"><div class="review-avatar">🏗️</div><div><div class="review-name">Tariq Mahmood</div><div class="review-co">TM Construction, Islamabad</div></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★☆</div>
+        <p class="review-text">"JazzCash se payment bohat easy thi. Booking bhi WhatsApp par ho gayi 5 minutes mein. Driver ne ghar tak delivery di. Highly recommended for small businesses!"</p>
+        <div class="review-author"><div class="review-avatar">🛒</div><div><div class="review-name">Sana Malik</div><div class="review-co">Online Store Owner, Lahore</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAYMENT METHODS -->
+<section id="payment">
+  <div class="inner">
+    <div class="fade-up">
+      <div class="section-label">Payment</div>
+      <h2 class="section-title">EASY PAYMENT OPTIONS</h2>
+      <p class="section-sub">Multiple payment methods for your convenience. COD available on select routes.</p>
+    </div>
+    <div class="payment-methods fade-up">
+      <div class="payment-card"><span class="payment-logo">💚</span><div><div class="payment-name">JazzCash</div><div class="payment-sub">Instant mobile payment</div></div></div>
+      <div class="payment-card"><span class="payment-logo">🟣</span><div><div class="payment-name">Easypaisa</div><div class="payment-sub">Fast & secure transfer</div></div></div>
+      <div class="payment-card"><span class="payment-logo">🏦</span><div><div class="payment-name">Bank Transfer</div><div class="payment-sub">All major Pakistan banks</div></div></div>
+      <div class="payment-card"><span class="payment-logo">💵</span><div><div class="payment-name">COD</div><div class="payment-sub">Cash on delivery</div></div></div>
+      <div class="payment-card"><span class="payment-logo">💳</span><div><div class="payment-name">Card Payment</div><div class="payment-sub">Visa / Mastercard</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CUSTOMER DASHBOARD -->
+<section id="dashboard">
+  <div class="inner">
+    <div class="fade-up">
+      <div class="section-label">Customer Portal</div>
+      <h2 class="section-title">YOUR DASHBOARD</h2>
+    </div>
+    <div class="dash-layout fade-up">
+      <aside class="dash-sidebar">
+        <div class="dash-user">
+          <div class="dash-avatar">👤</div>
+          <div class="dash-user-name">Ahmed Raza</div>
+          <div class="dash-user-sub">+92 300 1234567</div>
+        </div>
+        <ul class="dash-nav">
+          <li><a href="#" class="active"><span>📦</span> My Orders</a></li>
+          <li><a href="#"><span>📍</span> Track Active</a></li>
+          <li><a href="#"><span>🧾</span> Invoices</a></li>
+          <li><a href="#"><span>💳</span> Payments</a></li>
+          <li><a href="#"><span>🔄</span> Rebook</a></li>
+          <li><a href="#"><span>⚙️</span> Settings</a></li>
+        </ul>
+      </aside>
+      <div class="dash-main">
+        <div class="dash-cards">
+          <div class="dash-card"><div class="dash-card-icon">📦</div><div class="dash-card-num">24</div><div class="dash-card-label">Total Orders</div></div>
+          <div class="dash-card"><div class="dash-card-icon">🚛</div><div class="dash-card-num">3</div><div class="dash-card-label">Active Shipments</div></div>
+          <div class="dash-card"><div class="dash-card-icon">✅</div><div class="dash-card-num">21</div><div class="dash-card-label">Delivered</div></div>
+        </div>
+        <div class="orders-table">
+          <div class="orders-table-header">📋 Recent Orders</div>
+          <table>
+            <thead><tr><th>Booking ID</th><th>Route</th><th>Truck</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr><td>BGT-2024-8821</td><td>Lahore → Karachi</td><td>10 Wheeler</td><td>Dec 18</td><td><span class="status-badge status-transit">In Transit</span></td><td><a href="#tracking" style="color:var(--orange);font-size:12px;">Track</a></td></tr>
+              <tr><td>BGT-2024-8812</td><td>Faisalabad → Islamabad</td><td>6 Wheeler</td><td>Dec 15</td><td><span class="status-badge status-delivered">Delivered</span></td><td><a href="#" style="color:var(--gray);font-size:12px;">Invoice</a></td></tr>
+              <tr><td>BGT-2024-8799</td><td>Multan → Lahore</td><td>Mazda</td><td>Dec 10</td><td><span class="status-badge status-delivered">Delivered</span></td><td><a href="#" style="color:var(--gray);font-size:12px;">Rebook</a></td></tr>
+              <tr><td>BGT-2024-8771</td><td>Karachi → Peshawar</td><td>22 Wheeler</td><td>Dec 5</td><td><span class="status-badge status-delivered">Delivered</span></td><td><a href="#" style="color:var(--gray);font-size:12px;">Invoice</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADMIN DASHBOARD -->
+<section id="admin">
+  <div class="inner">
+    <div class="fade-up">
+      <div class="section-label">Admin Panel</div>
+      <h2 class="section-title">FLEET COMMAND CENTER</h2>
+    </div>
+    <div class="admin-grid fade-up">
+      <div class="admin-card"><span class="admin-card-icon">📦</span><div class="admin-card-num">1,284</div><div class="admin-card-label">Total Orders</div><div class="admin-card-change">↑ +12% this month</div></div>
+      <div class="admin-card"><span class="admin-card-icon">🚛</span><div class="admin-card-num">47</div><div class="admin-card-label">Active Trucks</div><div class="admin-card-change">↑ 6 on route today</div></div>
+      <div class="admin-card"><span class="admin-card-icon">👨‍✈️</span><div class="admin-card-num">63</div><div class="admin-card-label">Verified Drivers</div><div class="admin-card-change">↑ 3 new this week</div></div>
+      <div class="admin-card"><span class="admin-card-icon">💰</span><div class="admin-card-num">Rs 4.2M</div><div class="admin-card-label">Monthly Revenue</div><div class="admin-card-change">↑ +18% vs last month</div></div>
+    </div>
+    <div class="admin-lower fade-up">
+      <div class="admin-orders">
+        <div class="orders-table-header" style="padding:16px 20px;border-bottom:1px solid var(--glass-border);">🔴 Pending Orders — Assign Driver</div>
+        <table>
+          <thead><tr><th>ID</th><th>Route</th><th>Truck Needed</th><th>Goods</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td>BGT-2024-8830</td><td>Lahore → Quetta</td><td>22 Wheeler</td><td>Cement 20T</td><td><button style="background:var(--orange);border:none;color:white;padding:5px 12px;border-radius:6px;font-size:12px;cursor:pointer;">Assign</button></td></tr>
+            <tr><td>BGT-2024-8829</td><td>Karachi → Multan</td><td>10 Wheeler</td><td>Electronics</td><td><button style="background:var(--orange);border:none;color:white;padding:5px 12px;border-radius:6px;font-size:12px;cursor:pointer;">Assign</button></td></tr>
+            <tr><td>BGT-2024-8828</td><td>Islamabad → Peshawar</td><td>6 Wheeler</td><td>Furniture</td><td><button style="background:var(--orange);border:none;color:white;padding:5px 12px;border-radius:6px;font-size:12px;cursor:pointer;">Assign</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="admin-actions">
+        <h4>Quick Actions</h4>
+        <a href="#" class="action-btn"><span>📦</span> Manage Orders</a>
+        <a href="#" class="action-btn"><span>🚛</span> Fleet Management</a>
+        <a href="#" class="action-btn"><span>👨‍✈️</span> Driver Roster</a>
+        <a href="#" class="action-btn"><span>💰</span> Pricing Rules</a>
+        <a href="#" class="action-btn"><span>📊</span> Reports & Analytics</a>
+        <a href="#" class="action-btn"><span>⛽</span> Fuel Tracker</a>
+        <a href="#" class="action-btn"><span>🗺️</span> Route Optimization</a>
+        <a href="#" class="action-btn"><span>🏭</span> Warehouse Booking</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="inner">
+    <div class="fade-up">
+      <div class="section-label">Contact Us</div>
+      <h2 class="section-title">GET IN TOUCH</h2>
+      <p class="section-sub">Book via WhatsApp, phone, or our form. We respond instantly 24/7.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="fade-up">
+        <div class="contact-methods">
+          <a href="https://wa.me/923229086360" class="contact-card"><div class="contact-icon">💬</div><div><div class="contact-text-label">WhatsApp Booking</div><div class="contact-text-val">+92 322 908 6360</div></div></a>
+          <a href="tel:+923229086360" class="contact-card"><div class="contact-icon">📞</div><div><div class="contact-text-label">Call Us 24/7</div><div class="contact-text-val">+92 322 908 6360</div></div></a>
+          <a href="mailto:info@badshahgoodstransport.pk" class="contact-card"><div class="contact-icon">📧</div><div><div class="contact-text-label">Email</div><div class="contact-text-val">info@badshahgoodstransport.pk</div></div></a>
+          <div class="contact-card"><div class="contact-icon">📍</div><div><div class="contact-text-label">Main Office</div><div class="contact-text-val">Transport Nagar, Lahore, Punjab, Pakistan</div></div></div>
+        </div>
+        <a href="https://wa.me/923229086360" class="wa-btn" style="margin-top:20px;">💬 Book via WhatsApp Instantly</a>
+      </div>
+      <div class="fade-up">
+        <form class="contact-form" onsubmit="submitForm(event)">
+          <input type="text" placeholder="Your Full Name" required>
+          <input type="tel" placeholder="Phone Number (WhatsApp)" required>
+          <select>
+            <option value="">Select Service Needed</option>
+            <option>Book a Truck</option>
+            <option>Get Price Quote</option>
+            <option>Track Shipment</option>
+            <option>Complaint / Feedback</option>
+            <option>Partnership Inquiry</option>
+          </select>
+          <input type="text" placeholder="Route: From City → To City">
+          <textarea placeholder="Describe your cargo, weight, and any special requirements..."></textarea>
+          <button type="submit" class="btn-primary" style="border:none;cursor:pointer;width:100%;">SEND MESSAGE →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-name"><span>BADSHAH</span> GOODS TRANSPORT</div>
+        <p class="footer-desc">Pakistan's most trusted goods transport company. Fast, safe, and reliable freight services across all major cities and routes.</p>
+        <div style="margin-top:20px;display:flex;gap:12px;">
+          <a href="#" style="background:var(--glass);border:1px solid var(--glass-border);width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;font-size:16px;">📘</a>
+          <a href="#" style="background:var(--glass);border:1px solid var(--glass-border);width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;font-size:16px;">📸</a>
+          <a href="https://wa.me/923229086360" style="background:var(--glass);border:1px solid var(--glass-border);width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;font-size:16px;">💬</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <a href="#">Truck Booking</a>
+        <a href="#">Price Calculator</a>
+        <a href="#">Live Tracking</a>
+        <a href="#">Insurance</a>
+        <a href="#">Warehouse</a>
+        <a href="#">Load Matching</a>
+      </div>
+      <div class="footer-col">
+        <h5>Fleet</h5>
+        <a href="#">Mazda (10T)</a>
+        <a href="#">6 Wheeler (20T)</a>
+        <a href="#">10 Wheeler (300T)</a>
+        <a href="#">22 Wheeler (52T)</a>
+        <a href="#">Trailer (40T)</a>
+        <a href="#">Container (30T)</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href="#">About Us</a>
+        <a href="#">Our Drivers</a>
+        <a href="#">Careers</a>
+        <a href="#">Partner With Us</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2024 <span>Badshah Goods Transport</span>. All rights reserved.</div>
+      <div>🇵🇰 Proudly serving Pakistan — <span>Lahore, Karachi, Islamabad & all major cities</span></div>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/923229086360" class="wa-float" title="WhatsApp Booking">💬</a>
+
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="booking-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeBooking()">✕</button>
+    <h3>🚛 BOOK YOUR TRUCK</h3>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div class="form-row">
+        <div class="form-group"><label>Pickup City</label><select><option>Lahore</option><option>Karachi</option><option>Islamabad</option><option>Faisalabad</option><option>Multan</option><option>Peshawar</option></select></div>
+        <div class="form-group"><label>Delivery City</label><select><option>Karachi</option><option>Lahore</option><option>Islamabad</option><option>Faisalabad</option><option>Multan</option><option>Quetta</option></select></div>
+      </div>
+      <div class="form-group"><label>Pickup Address</label><input type="text" placeholder="Full pickup address"></div>
+      <div class="form-group"><label>Delivery Address</label><input type="text" placeholder="Full delivery address"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Goods Type</label><select><option>General Cargo</option><option>Fragile</option><option>Food</option><option>Machinery</option><option>Electronics</option><option>Construction</option></select></div>
+        <div class="form-group"><label>Weight (KG)</label><input type="number" placeholder="KG"></div>
+      </div>
+      <div class="form-group"><label>Truck Type</label><select><option>Mazda (2T)</option><option>6 Wheeler (5T)</option><option>10 Wheeler (10T)</option><option>22 Wheeler (22T)</option><option>Trailer (40T)</option><option>Container (30T)</option><option>Oil Tanker</option><option>Loader Rickshaw</option></select></div>
+      <div class="form-row">
+        <div class="form-group"><label>Pickup Date</label><input type="date"></div>
+        <div class="form-group"><label>Quantity</label><input type="number" value="1" min="1"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Delivery Type</label><select><option>Normal</option><option>Urgent (+30%)</option></select></div>
+        <div class="form-group"><label>Special Handling</label><select><option>None</option><option>Fragile</option><option>Hazmat</option></select></div>
+      </div>
+      <div class="form-group"><label>Payment Method</label><select><option>JazzCash</option><option>Easypaisa</option><option>Bank Transfer</option><option>Cash on Delivery</option><option>Card</option></select></div>
+      <div class="form-group"><label>Your Phone (WhatsApp)</label><input type="tel" placeholder="+92 3229086360"></div>
+      <button class="btn-primary" style="width:100%;border:none;padding:16px;font-size:15px;" onclick="confirmBooking()">CONFIRM BOOKING →</button>
+      <a href="https://wa.me/923229086360" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:14px;background:#25D366;border-radius:8px;color:white;font-weight:700;text-decoration:none;font-size:14px;">💬 Book via WhatsApp Instead</a>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRMATION MODAL -->
+<div class="modal-overlay" id="confirm-modal">
+  <div class="modal" style="text-align:center;">
+    <button class="modal-close" onclick="closeConfirm()">✕</button>
+    <div style="font-size:64px;margin-bottom:16px;">✅</div>
+    <h3 style="margin-bottom:12px;">BOOKING CONFIRMED!</h3>
+    <div style="background:rgba(249,115,22,0.1);border:1px solid rgba(249,115,22,0.3);border-radius:10px;padding:16px;margin:16px 0;">
+      <div style="font-size:12px;color:var(--gray);margin-bottom:4px;">Your Booking ID</div>
+      <div style="font-family:'Bebas Neue';font-size:32px;color:var(--orange);" id="booking-id-display">BGT-2024-8831</div>
+    </div>
+    <p style="color:var(--gray);font-size:14px;line-height:1.6;margin-bottom:20px;">Our team will contact you within 30 minutes to confirm your booking. You will receive SMS and WhatsApp updates.</p>
+    <a href="https://wa.me/923229086360" class="wa-btn" style="display:flex;justify-content:center;">💬 Chat on WhatsApp</a>
+  </div>
+</div>
+
+<script>
+// ─── DISTANCE MAP ───
+const distances = {
+  'lahore-karachi': 1212, 'karachi-lahore': 1212,
+  'lahore-islamabad': 375, 'islamabad-lahore': 375,
+  'lahore-faisalabad': 186, 'faisalabad-lahore': 186,
+  'lahore-multan': 330, 'multan-lahore': 330,
+  'lahore-peshawar': 510, 'peshawar-lahore': 510,
+  'lahore-quetta': 1030, 'quetta-lahore': 1030,
+  'lahore-rawalpindi': 370, 'rawalpindi-lahore': 370,
+  'karachi-islamabad': 1400, 'islamabad-karachi': 1400,
+  'karachi-peshawar': 1730, 'peshawar-karachi': 1730,
+  'karachi-quetta': 695, 'quetta-karachi': 695,
+  'karachi-multan': 1030, 'multan-karachi': 1030,
+  'islamabad-peshawar': 180, 'peshawar-islamabad': 180,
+  'islamabad-quetta': 1100, 'quetta-islamabad': 1100,
+  'faisalabad-karachi': 1200, 'karachi-faisalabad': 1200,
+  'multan-peshawar': 740, 'peshawar-multan': 740,
+  'multan-quetta': 690, 'quetta-multan': 690,
+};
+
+const truckRates = { mazda: 18, '6w': 22, '10w': 28, '22w': 36, trailer: 48, container: 42, tanker: 40, loader: 12 };
+const tollMap = { mazda: 800, '6w': 1500, '10w': 2500, '22w': 4000, trailer: 6000, container: 5000, tanker: 4500, loader: 400 };
+const specialHandling = { none: 0, fragile: 2000, hazmat: 5000, refrigerated: 4000 };
+
+function getDistance(from, to) {
+  const key = from.toLowerCase() + '-' + to.toLowerCase();
+  return distances[key] || Math.floor(Math.random() * 800 + 200);
+}
+
+function calcHeroPrice() {
+  const from = document.getElementById('h-from').value;
+  const to = document.getElementById('h-to').value;
+  const truck = document.getElementById('h-truck').value;
+  const weight = parseFloat(document.getElementById('h-weight').value) || 0;
+  const urgency = document.getElementById('h-urgency').value;
+  const el = document.getElementById('hero-price');
+  if (!from || !to || !truck) { el.textContent = 'Rs. —'; return; }
+  const dist = getDistance(from, to);
+  const rate = truckRates[truck] || 20;
+  const weightTon = weight / 1000 || 1;
+  const base = dist * rate * Math.max(weightTon, 0.5);
+  const fuel = base * 0.12;
+  const toll = tollMap[truck] || 2000;
+  let total = base + fuel + toll + 1500;
+  if (urgency === 'urgent') total *= 1.3;
+  el.textContent = 'Rs. ' + Math.round(total).toLocaleString();
+}
+
+function syncTon() { const kg = document.getElementById('c-kg').value; if (kg) document.getElementById('c-ton').value = (kg/1000).toFixed(2); }
+function syncKg() { const ton = document.getElementById('c-ton').value; if (ton) document.getElementById('c-kg').value = Math.round(ton*1000); }
+
+function calculatePrice() {
+  const from = document.getElementById('c-from').value;
+  const to = document.getElementById('c-to').value;
+  const truck = document.getElementById('c-truck').value;
+  const kg = parseFloat(document.getElementById('c-kg').value) || 1000;
+  const urgency = document.getElementById('c-urgency').value;
+  const special = document.getElementById('c-special').value;
+  if (!from || !to) return;
+  const dist = getDistance(from, to);
+  const rate = truckRates[truck] || 20;
+  const weightTon = kg / 1000;
+  const base = Math.round(dist * rate * Math.max(weightTon, 0.5));
+  const fuel = Math.round(base * 0.12);
+  const toll = tollMap[truck] || 2000;
+  const labour = 1500;
+  const specCost = specialHandling[special] || 0;
+  let total = base + fuel + toll + labour + specCost;
+  const urgentCost = urgency === 'urgent' ? Math.round(total * 0.3) : 0;
+  total += urgentCost;
+  document.getElementById('r-base').textContent = 'Rs. ' + base.toLocaleString();
+  document.getElementById('r-fuel').textContent = 'Rs. ' + fuel.toLocaleString();
+  document.getElementById('r-toll').textContent = 'Rs. ' + toll.toLocaleString();
+  document.getElementById('r-labour').textContent = 'Rs. ' + labour.toLocaleString();
+  document.getElementById('r-special').textContent = 'Rs. ' + specCost.toLocaleString();
+  document.getElementById('r-urgent').textContent = urgentCost ? 'Rs. ' + urgentCost.toLocaleString() : 'Rs. —';
+  document.getElementById('r-total').textContent = 'Rs. ' + total.toLocaleString();
+}
+
+function trackOrder() {
+  const id = document.getElementById('track-id').value.trim();
+  if (!id) { alert('Please enter a booking ID'); return; }
+  document.getElementById('track-result').classList.add('active');
+}
+
+function openBooking() {
+  document.getElementById('booking-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeBooking() {
+  document.getElementById('booking-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function confirmBooking() {
+  closeBooking();
+  const id = 'BGT-2024-' + (8000 + Math.floor(Math.random() * 999));
+  document.getElementById('booking-id-display').textContent = id;
+  document.getElementById('confirm-modal').classList.add('open');
+}
+function closeConfirm() {
+  document.getElementById('confirm-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function submitForm(e) { e.preventDefault(); confirmBooking(); }
+function selectTruck(t) { openBooking(); }
+
+// Language toggle (demo)
+let isUrdu = false;
+function toggleLang() {
+  isUrdu = !isUrdu;
+  const btn = document.querySelector('.lang-btn');
+  btn.textContent = isUrdu ? 'English' : 'اردو';
+  if (isUrdu) {
+    document.querySelector('.hero-sub').innerHTML = '<strong>تیز، محفوظ اور قابل اعتماد</strong><br>پاکستان بھر میں سامان کی ترسیل';
+  } else {
+    document.querySelector('.hero-sub').innerHTML = '<strong>Fast, Safe & Reliable</strong><br>Goods Transport Across Pakistan';
+  }
+}
+
+// ─── COUNTER ANIMATION ───
+function animateCounters() {
+  document.querySelectorAll('[data-target]').forEach(el => {
+    const target = parseInt(el.getAttribute('data-target'));
+    const duration = 2000;
+    const step = target / (duration / 16);
+    let current = 0;
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { current = target; clearInterval(timer); }
+      el.textContent = Math.floor(current).toLocaleString() + (target === 98 ? '%' : target >= 1000 ? '+' : '+');
+    }, 16);
+  });
+}
+
+// ─── SCROLL ANIMATIONS ───
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      if (e.target.querySelector('[data-target]')) animateCounters();
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Counter strip observer
+const counterObserver = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) { animateCounters(); counterObserver.disconnect(); }
+}, { threshold: 0.3 });
+const counterStrip = document.querySelector('.counter-strip');
+if (counterStrip) counterObserver.observe(counterStrip);
+
+// ─── NAV SCROLL ───
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  nav.style.background = window.scrollY > 80 ? 'rgba(10,22,40,0.98)' : 'rgba(10,22,40,0.95)';
+});
+
+// Close modal on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+});
+
+// Set default date
+const dateInputs = document.querySelectorAll('input[type="date"]');
+const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 1);
+dateInputs.forEach(d => d.value = tomorrow.toISOString().split('T')[0]);
+</script>
+
+    </div>
+  </div>
+
+  <script>
+// ============================================
+// 1. HAMBURGER MENU — open/close on mobile
+// ============================================
+const hamburger = document.getElementById('hamburger');
+const navLinks  = document.getElementById('nav-links');
+
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+});
+
+// Close the menu when any nav link is clicked
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+  });
+});
+
+
+// ============================================
+// 2. NAVBAR SHRINK — shrinks on scroll
+// ============================================
+const navbar = document.getElementById('navbar');
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) {
+    navbar.style.padding = '0.75rem 5%';
+  } else {
+    navbar.style.padding = '1.1rem 5%';
+  }
+});
+
+
+// ============================================
+// 3. FADE-IN ON SCROLL — reveals sections
+// ============================================
+const fadeElements = document.querySelectorAll('.fade-in');
+
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  },
+  { threshold: 0.12 }
+);
+
+fadeElements.forEach(el => observer.observe(el));
+
+
+// ============================================
+// 4. ACTIVE NAV LINK — highlights current section
+// ============================================
+const sections = document.querySelectorAll('section[id]');
+const allLinks  = document.querySelectorAll('.nav-links a');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+
+  sections.forEach(section => {
+    if (window.scrollY >= section.offsetTop - 120) {
+      current = section.getAttribute('id');
+    }
+  });
+
+  allLinks.forEach(link => {
+    if (link.getAttribute('href') === `#${current}`) {
+      link.style.color = 'var(--accent)';
+    } else {
+      link.style.color = '';
+    }
+  });
+});
+
+// ============================================
+// PROJECT MODALS
+// ============================================
+function openModal(id) {
+  // Enable the right styles
+  if (id === 'ml') {
+    document.getElementById('ml-styles').removeAttribute('media');
+    document.getElementById('tr-styles').setAttribute('media','none');
+  } else {
+    document.getElementById('tr-styles').removeAttribute('media');
+    document.getElementById('ml-styles').setAttribute('media','none');
+  }
+  document.getElementById('modal-' + id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(id) {
+  document.getElementById('modal-' + id).classList.remove('open');
+  document.body.style.overflow = '';
+  // Disable styles again
+  document.getElementById('ml-styles').setAttribute('media','none');
+  document.getElementById('tr-styles').setAttribute('media','none');
+}
+
+// Close modal on Escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeModal('ml');
+    closeModal('tr');
+  }
+});
+  </script>
+</body>
+</html>
